@@ -1,0 +1,84 @@
+html {
+  width: 6816px;
+  height: 2240px; }
+
+body {
+  background: #DDFFF7;
+  width: 100%;
+  height: 100%;
+  margin: 0; }
+
+#pageHolder {
+  width: 100%;
+  height: 100%;
+  font-size: 0; }
+
+#gameContent {
+  vertical-align: top;
+  width: 3408px;
+  height: 2240px;
+  display: inline-block; }
+
+#orientationImageHolder {
+  width: 1000px;
+  text-align: center; }
+
+#orientationImage {
+  margin-top: 20px;
+  height: 40%;
+  width: 40%; }
+
+#timerText {
+  width: 1000px;
+  font-family: "Fredoka One", cursive;
+  font-size: 40px;
+  color: blueviolet;
+  margin-top: 30px;
+  margin-bottom: 10px; }
+
+#downloadText {
+  width: 1000px;
+  font-family: "Acme", sans-serif;
+  font-size: 30px;
+  color: blueviolet;
+  margin: 0; }
+
+#infoContent {
+  vertical-align: top;
+  position: relative;
+  width: 3408px;
+  height: 2240px;
+  display: inline-block; }
+
+#tylerInfo {
+  text-align: right;
+  margin-top: 100px;
+  margin-right: 100px;
+  width: 100%;
+  height: 700px; }
+
+#tylerInfoText {
+  display: inline-block;
+  margin-right: 100px; }
+
+#tylerInfoTitle {
+  font-size: 60px; }
+
+#tylerInfoContent {
+  width: 1500px;
+  font-size: 45px;
+  word-wrap: break-word; }
+
+#tylerImg {
+  display: inline-block;
+  width: 500px;
+  height: 500px;
+  border: 20px solid purple;
+  margin-bottom: 100px; }
+
+#tutorialVideo {
+  width: 400px;
+  height: 250px;
+  background: orange; }
+
+/*# sourceMappingURL=main.css.map */
