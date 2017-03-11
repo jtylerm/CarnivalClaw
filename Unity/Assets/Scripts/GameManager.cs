@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour {
 
 	void Update() {
 		if(roundHasEnded == false) {
+
+			//keyboard commands for when not building mobile
+			#if !UNITY_ANDROID && !UNITY_IOS
 			if(Input.GetMouseButtonDown(0) && claw.isReady) {
 				claw.isReady = false;
 				TweenHelper.defaultTweenHelper.TweenMove(claw.gameObject, .25f, claw.clawTopTarget.transform.position, DidFinishAnimatingClawToTarget);
@@ -38,9 +41,26 @@ public class GameManager : MonoBehaviour {
 				claw.isReady = false;
 				TweenHelper.defaultTweenHelper.TweenMove(claw.gameObject, .25f, claw.clawBottomTarget.transform.position, DidFinishAnimatingClawToTarget);
 			}
+			#endif
+
+
 
 			//Update the timer
 			UpdateTimerUI();
+		}
+	}
+
+	public void FireClawTop() {
+		if(claw.isReady == true) {
+			claw.isReady = false;
+			TweenHelper.defaultTweenHelper.TweenMove(claw.gameObject, .25f, claw.clawTopTarget.transform.position, DidFinishAnimatingClawToTarget);
+		}
+	}
+
+	public void FireClawBottom() {
+		if(claw.isReady == true) {
+			claw.isReady = false;
+			TweenHelper.defaultTweenHelper.TweenMove(claw.gameObject, .25f, claw.clawBottomTarget.transform.position, DidFinishAnimatingClawToTarget);
 		}
 	}
 

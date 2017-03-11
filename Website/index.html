@@ -17,11 +17,21 @@
 <body>
 
     <div id="pageHolder">
+
         <div id="gameContent">
-            <div id="orientationImageHolder">
-                <img id="orientationImage" src="" />
+            <div id="logoContainer">
+                <img src="Images/logo.png" />
+            </div>
+            <div id="orientationImageContainer">
+                <img id="orientationImage" src="Images/orientationImage1.jpg" />
+            </div>
+            <div id="gameContentBottom">
                 <p id="timerText">Current Round Time Remaining <span id="timerValue">:25</span></p>
-                <p id="downloadText">Download The App On iTunes and GooglePlay</p>
+                <p id="downloadText">Download The App On iTunes and GooglePlay
+                <br/><br/>Aim your device's camera at the orientation image above</p>
+                <div id="codeArtLogoContainer">
+                    <img id="codeArtLogo" src="Images/codeArtLogo.jpg" />
+                </div>
             </div>
         </div>
 
@@ -41,26 +51,28 @@
             </div>
 
             <div id="videoInfo">
-                <div id="tutorialVideoContainer">
+                <div id="tutorialVideoContent">
                     <div id="tutorialVideoHeader">
-                        <p><span class="underlined">Tutorials</span></p>
+                        <p><span class="underlined">Tutorial</span></p>
                     </div>
-                    <div id="tutorialVideo">
-
+                    <div id="tutorialVideoContainer">
+                        <video id="tutorialVideo" src="https://s3.amazonaws.com/tylermayberry/carnivalclaw/tutorial.mp4" autoplay loop></video>
                     </div>
                 </div>
-                <div id="instructionsVideoContainer">
-                    <div id="instructionsVideoHeader">
-                        <p><span class="underlined">Instructions</span></p>
+                <div id="tipsVideoContent">
+                    <div id="tipsVideoHeader">
+                        <p><span class="underlined">Tips</span></p>
                     </div>
-                    <div id="instructionsVideo">
-
+                    <div id="tipsVideoContainer">
+                        <video id="tipsVideo" src="https://s3.amazonaws.com/tylermayberry/carnivalclaw/tips.mp4" autoplay loop></video>
                     </div>
                 </div>
             </div>
 
             <div id="leaderboardInfo">
-
+                <div id="leaderboardContainer">
+                    <img id="leaderboard" src="Images/dummyLeaderboard.png" />
+                </div>
             </div>
         </div>
     </div>

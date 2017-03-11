@@ -4,6 +4,8 @@ $color2: #DDFFF7;
 $fontFredoka: 'Fredoka One', cursive;
 $fontAcme: 'Acme', sans-serif;
 
+//Immersion Theater Styling
+
 //Elements
 html {
   width: 6816px;
@@ -26,8 +28,6 @@ body {
 #pageHolder {
   width: 100%;
   height: 100%;
-  font-size: 0;
-
 }
 
 //GameContent Section
@@ -36,35 +36,57 @@ body {
   width: 3408px;
   height: 2240px;
   display: inline-block;
-  background-image: url(https://s3.amazonaws.com/tylermayberry/gameContentBG.png);
+  background-image: url(https://s3.amazonaws.com/tylermayberry/carnivalclaw/gameContentBG.png);
 }
 
-#orientationImageHolder {
-  width: 1000px;
+#gameContentBottom {
+  height: 600px;
+  margin: auto;
+  text-align: center;
+  padding-top: 100px;
+}
+
+#logoContainer {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+#orientationImageContainer {
+  margin: auto;
   text-align: center;
 }
 
 #orientationImage {
-  margin-top: 20px;
-  height: 40%;
-  width: 40%;
+  padding-top: 20px;
 }
 
 #timerText {
-  width: 1000px;
+  width: 1500px;
   font-family: $fontFredoka;
-  font-size: 40px;
+  font-size: 80px;
   color: $color2;
-  margin-top: 30px;
-  margin-bottom: 10px;
+  padding-top: 30px;
+  padding-bottom: 10px;
+  margin: auto;
 }
 
 #downloadText {
-  width: 1000px;
+  width: 1500px;
   font-family: $fontAcme;
-  font-size: 30px;
+  font-size: 60px;
   color: $color2;
-  margin: 0;
+  margin: auto;
+}
+
+#codeArtLogoContainer{
+  text-align: center;
+  padding-top: 200px;
+}
+
+#codeArtLogo {
+  width: 450px;
+  height: 115px;
 }
 
 //InfoContent Section
@@ -79,14 +101,14 @@ body {
 //TylerInfo Section
 #tylerInfo {
   height: 740px;
-  padding-top:100px;
-  padding-right: 100px;
+  padding-top: 100px;
+  padding-right: 500px;
   text-align: right;
 }
 
 #tylerInfoText {
   float: left;
-  margin-left: 1000px;
+  margin-left: 600px;
   width: 1600px;
   height: 100%;
   font-family: $fontAcme;
@@ -96,7 +118,7 @@ body {
 #tylerInfoTitle {
   width: 100%;
   font-size: 60px;
-  font-weight: bold;
+  //font-weight: bold;
   font-family: $fontFredoka;
 }
 
@@ -113,16 +135,18 @@ body {
 
 #tylerImg {
   border: 20px solid $color2;
+  border-radius: 15px;
 }
 
 //VideoInfo Section
 #videoInfo {
   height: 740px;
-  padding-top: 100px;
+  padding-top: 40px;
+  background: rebeccapurple;
 }
 
 //Tutorial Video Section
-#tutorialVideoContainer {
+#tutorialVideoContent {
   float: left;
   width: 1704px;
   height: 100%;
@@ -137,22 +161,24 @@ body {
   padding-bottom: 50px;
 }
 
-#tutorialVideo {
-  width: 700px;
-  height: 350px;
-  background: blue;
+#tutorialVideoContainer {
   margin: auto;
 }
 
-//Instructions Video Section
-#instructionsVideoContainer{
+#tutorialVideo {
+  border: 20px solid $color2;
+  border-radius: 15px;
+}
+
+//Tips Video Section
+#tipsVideoContent{
   float: right;
   width: 1704px;
   height: 100%;
   text-align: center;
 }
 
-#instructionsVideoHeader {
+#tipsVideoHeader {
   font-size: 60px;
   font-weight: bold;
   font-family: $fontFredoka;
@@ -160,14 +186,60 @@ body {
   padding-bottom: 50px;
 }
 
-#instructionsVideo {
+#tipsVideoContainer {
   margin: auto;
-  width: 700px;
-  height: 350px;
-  background: blue;
+}
+
+#tipsVideo {
+  border: 20px solid $color2;
+  border-radius: 15px;
 }
 
 //Leaderboard Section
 #leaderboardInfo {
   height: 740px;
+  padding-top: 30px;
+}
+
+#leaderboardContainer {
+  text-align: center;
+  margin: auto;
+}
+
+#leaderboard {
+  border: 20px solid $color2;
+  border-radius: 15px;
+}
+
+//Game Lab Styling
+@media only screen and (min-height: 1720px) {
+
+  //Elements
+  html{
+    width: 7337px;
+    height: 1720px;
+  }
+
+  //IDs
+  #gameContent {
+    width: 3668px;
+    height: 860px;
+    vertical-align: top;
+    display: inline-block;
+    background-image: url(https://s3.amazonaws.com/tylermayberry/carnivalclaw/gameContentBG.png);
+  }
+
+  #infoContent {
+    width: 3668px;
+    height: 860px;
+    vertical-align: top;
+    position: relative;
+    display: inline-block;
+  }
+
+  #orientationImage {
+    width: 512px;
+    height: 512px;
+    padding: 0;
+  }
 }
