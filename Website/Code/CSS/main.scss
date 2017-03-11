@@ -32,6 +32,7 @@ body {
 
 //GameContent Section
 #gameContent {
+  float: left;
   vertical-align: top;
   width: 3408px;
   height: 2240px;
@@ -81,7 +82,7 @@ body {
 
 #codeArtLogoContainer{
   text-align: center;
-  padding-top: 200px;
+  //padding-top: 200px;
 }
 
 #codeArtLogo {
@@ -91,6 +92,7 @@ body {
 
 //InfoContent Section
 #infoContent {
+  float: right;
   vertical-align: top;
   position: relative;
   width: 3408px;
@@ -211,35 +213,35 @@ body {
   border-radius: 15px;
 }
 
-//Game Lab Styling
-@media only screen and (min-height: 1720px) {
-
-  //Elements
-  html{
-    width: 7337px;
-    height: 1720px;
-  }
-
-  //IDs
-  #gameContent {
-    width: 3668px;
-    height: 860px;
-    vertical-align: top;
-    display: inline-block;
-    background-image: url(https://s3.amazonaws.com/tylermayberry/carnivalclaw/gameContentBG.png);
-  }
-
-  #infoContent {
-    width: 3668px;
-    height: 860px;
-    vertical-align: top;
-    position: relative;
-    display: inline-block;
-  }
-
-  #orientationImage {
-    width: 512px;
-    height: 512px;
-    padding: 0;
-  }
-}
+////Game Lab Styling
+//@media only screen and (min-height: 1720px) {
+//
+//  //Elements
+//  html{
+//    width: 7337px;
+//    height: 1720px;
+//  }
+//
+//  //IDs
+//  #gameContent {
+//    width: 3668px;
+//    height: 860px;
+//    vertical-align: top;
+//    display: inline-block;
+//    background-image: url(https://s3.amazonaws.com/tylermayberry/carnivalclaw/gameContentBG.png);
+//  }
+//
+//  #infoContent {
+//    width: 3668px;
+//    height: 860px;
+//    vertical-align: top;
+//    position: relative;
+//    display: inline-block;
+//  }
+//
+//  #orientationImage {
+//    width: 512px;
+//    height: 512px;
+//    padding: 0;
+//  }
+//}
