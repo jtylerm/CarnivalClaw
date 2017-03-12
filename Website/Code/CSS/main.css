@@ -173,6 +173,7 @@ body {
   #logoContainer {
     text-align: center;
     margin: 0;
+    margin-top: 50px;
     margin-bottom: 50px; }
 
   #logoImg {
@@ -209,11 +210,12 @@ body {
     height: 600px;
     margin: auto;
     text-align: center;
-    padding: 0; }
+    padding: 0;
+    padding-top: 50px; }
 
   #codeArtLogoContainer {
     text-align: center;
-    padding-top: 50px; }
+    padding-top: 100px; }
 
   #codeArtLogo {
     width: 450px;
@@ -229,7 +231,7 @@ body {
   #tylerInfo {
     height: 573px;
     padding-top: 85px;
-    padding-right: 500px;
+    padding-right: 585px;
     text-align: right; }
 
   #tylerInfoText {
