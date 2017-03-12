@@ -21,7 +21,7 @@ body {
   width: 3408px;
   height: 2240px;
   display: inline-block;
-  background-image: url(https://s3.amazonaws.com/tylermayberry/carnivalclaw/gameContentBG.png); }
+  background-image: url(https://s3.amazonaws.com/tylermayberry/carnivalclaw/gameContentBG_Immersion.png); }
 
 #gameContentBottom {
   height: 600px;
@@ -42,7 +42,7 @@ body {
   padding-top: 20px; }
 
 #timerText {
-  width: 1500px;
+  width: 1700px;
   font-family: "Fredoka One", cursive;
   font-size: 80px;
   color: #DDFFF7;
@@ -51,14 +51,15 @@ body {
   margin: auto; }
 
 #downloadText {
-  width: 1500px;
+  width: 1700px;
   font-family: "Acme", sans-serif;
   font-size: 60px;
   color: #DDFFF7;
   margin: auto; }
 
 #codeArtLogoContainer {
-  text-align: center; }
+  text-align: center;
+  padding-top: 100px; }
 
 #codeArtLogo {
   width: 450px;
@@ -102,7 +103,10 @@ body {
 
 #tylerImg {
   border: 20px solid #DDFFF7;
-  border-radius: 15px; }
+  border-radius: 15px;
+  width: 500px;
+  height: 500px;
+  background-image: url(https://s3.amazonaws.com/tylermayberry/carnivalclaw/tyler_Immersion.png); }
 
 #videoInfo {
   height: 740px;
@@ -160,5 +164,164 @@ body {
 #leaderboard {
   border: 20px solid #DDFFF7;
   border-radius: 15px; }
+
+@media only screen and (max-height: 1720px) {
+  html {
+    width: 7337px;
+    height: 1720px; }
+
+  #logoContainer {
+    text-align: center;
+    margin: 0;
+    margin-bottom: 50px; }
+
+  #logoImg {
+    width: 393px;
+    height: 250px; }
+
+  #gameContent {
+    width: 3668px;
+    height: 100%;
+    vertical-align: top;
+    display: inline-block;
+    background-image: url(https://s3.amazonaws.com/tylermayberry/carnivalclaw/gameContentBG_GameLab.png); }
+
+  #orientationImage {
+    width: 768px;
+    height: 768px;
+    padding: 0; }
+
+  #timerText {
+    width: 1700px;
+    font-family: "Fredoka One", cursive;
+    font-size: 70px;
+    color: #DDFFF7;
+    margin: auto; }
+
+  #downloadText {
+    width: 1700px;
+    font-family: "Acme", sans-serif;
+    font-size: 50px;
+    color: #DDFFF7;
+    margin: auto; }
+
+  #gameContentBottom {
+    height: 600px;
+    margin: auto;
+    text-align: center;
+    padding: 0; }
+
+  #codeArtLogoContainer {
+    text-align: center;
+    padding-top: 50px; }
+
+  #codeArtLogo {
+    width: 450px;
+    height: 115px; }
+
+  #infoContent {
+    width: 3668px;
+    height: 100%;
+    vertical-align: top;
+    position: relative;
+    display: inline-block; }
+
+  #tylerInfo {
+    height: 573px;
+    padding-top: 85px;
+    padding-right: 500px;
+    text-align: right; }
+
+  #tylerInfoText {
+    float: left;
+    margin-left: 600px;
+    width: 1600px;
+    height: 100%;
+    font-family: "Acme", sans-serif;
+    color: #DDFFF7; }
+
+  #tylerInfoTitle {
+    width: 100%;
+    font-size: 50px;
+    font-family: "Fredoka One", cursive; }
+
+  #tylerInfoContent {
+    width: 100%;
+    font-size: 35px;
+    word-wrap: break-word; }
+
+  #tylerImgContainer {
+    float: right;
+    height: 100%; }
+
+  #tylerImg {
+    border: 20px solid #DDFFF7;
+    border-radius: 15px;
+    width: 400px;
+    height: 400px;
+    background-image: url(https://s3.amazonaws.com/tylermayberry/carnivalclaw/tyler_GameLab.png); }
+
+  #videoInfo {
+    height: 573px;
+    padding-top: 40px;
+    background: rebeccapurple; }
+
+  #tutorialVideoContent {
+    float: left;
+    width: 1704px;
+    height: 100%;
+    text-align: center; }
+
+  #tutorialVideoHeader {
+    font-size: 50px;
+    font-weight: bold;
+    font-family: "Fredoka One", cursive;
+    color: #DDFFF7;
+    padding-bottom: 30px; }
+
+  #tutorialVideoContainer {
+    margin: auto; }
+
+  #tutorialVideo {
+    border: 20px solid #DDFFF7;
+    border-radius: 15px;
+    width: 538px;
+    height: 390px; }
+
+  #tipsVideoContent {
+    float: right;
+    width: 1704px;
+    height: 100%;
+    text-align: center; }
+
+  #tipsVideoHeader {
+    font-size: 50px;
+    font-weight: bold;
+    font-family: "Fredoka One", cursive;
+    color: #DDFFF7;
+    padding-bottom: 30px; }
+
+  #tipsVideoContainer {
+    margin: auto; }
+
+  #tipsVideo {
+    border: 20px solid #DDFFF7;
+    border-radius: 15px;
+    width: 538px;
+    height: 390px; }
+
+  #leaderboardInfo {
+    height: 573px;
+    padding-top: 30px; }
+
+  #leaderboardContainer {
+    text-align: center;
+    margin: auto; }
+
+  #leaderboard {
+    width: 1358px;
+    height: 500px;
+    border: 20px solid #DDFFF7;
+    border-radius: 15px; } }
 
 /*# sourceMappingURL=main.css.map */
