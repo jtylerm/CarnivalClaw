@@ -115,12 +115,16 @@ GameManager.prototype.transitionToWaiting = function () {
     this.nextGameState = GameState.IN_ROUND;
     this.timeRemaining = TIME_BETWEEN_ROUNDS;
     this.roundID = generateUUID();
+
+    //TODO: update the UI
 };
 
 GameManager.prototype.transitionToInRound = function () {
     this.gameState = GameState.IN_ROUND;
     this.nextGameState = GameState.WAITING_NEXT_ROUND;
     this.timeRemaining = ROUND_DURATION;
+
+    //TODO: update the UI
 };
 
 var gameManager = new GameManager();

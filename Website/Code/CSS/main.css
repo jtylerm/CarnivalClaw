@@ -162,6 +162,8 @@ body {
   margin: auto; }
 
 #leaderboard {
+  width: 2000px;
+  height: 650px;
   border: 20px solid #DDFFF7;
   border-radius: 15px; }
 

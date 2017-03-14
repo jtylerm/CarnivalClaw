@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
+	
+	public static GameManager defaultGameManager = null;
 
 	Claw claw;
 	Vector3 clawStartPosition;
@@ -15,21 +17,58 @@ public class GameManager : MonoBehaviour {
 	float seconds = 0;
 
 	int score = 0;
+	int scoreLastRound = 0;
 	int itemPointWorth = 0;
 
-	bool roundHasEnded = false;
+	WebRequestManager webRequestManager = null;
+
+
+	int playerID = -1;
+	string playerUsername = null;
+
+
+
+	GameState gameState = GameState.UNSPECIFIED;
+	GameState nextGameState = GameState.UNSPECIFIED;
+	float nextStateStartTime = 0;
+	float reportedTimeRemaining = 0;
+	string currentRoundID = null;
+
+	float lastWebUpdateTime = 0;
+	bool shouldFireWebUpdate = false;
 
 	void Awake() {
+		PlayerPrefs.DeleteAll();
+
+		defaultGameManager = this;
+
 		claw = GameObject.Find("Claw").GetComponent<Claw>();
 
 		clawStartPosition = claw.gameObject.transform.position;
 
 		scoreText = GameObject.Find("Canvas").transform.Find("ScoreText").GetComponent<Text>();
 		timerText = GameObject.Find("Canvas").transform.Find("TimerText").GetComponent<Text>();
+
+		webRequestManager = new WebRequestManager();
+	}
+
+	void Start() {
+
+		if(PlayerPrefs.HasKey("playerID")){
+			this.playerID = PlayerPrefs.GetInt("playerID");
+			this.playerUsername = PlayerPrefs.GetString("playerUsername");
+
+			//TODO: load user UI
+
+			StartWebUpdateTimer();
+		}
+		else {
+			StartCoroutine(webRequestManager.GetNewUser());
+		}
 	}
 
 	void Update() {
-		if(roundHasEnded == false) {
+		if(gameState == GameState.IN_ROUND) {
 
 			//keyboard commands for when not building mobile
 			#if !UNITY_ANDROID && !UNITY_IOS
@@ -48,6 +87,61 @@ public class GameManager : MonoBehaviour {
 			//Update the timer
 			UpdateTimerUI();
 		}
+
+		if(shouldFireWebUpdate){
+
+			if(Time.time - lastWebUpdateTime > 1){
+				//Debug.Log("web update time diff: " + (Time.time - lastWebUpdateTime));
+				lastWebUpdateTime = Time.time;
+				//TODO: get index of selected target image
+				int orientationImageIndex = 0;
+
+				StartCoroutine(webRequestManager.SendPlayerUpdate(orientationImageIndex, this.playerID, this.score, this.currentRoundID));
+			}
+		}
+
+	}
+
+	void StartWebUpdateTimer(){
+		shouldFireWebUpdate = true;
+	}
+		
+	public void DidGetNewUser(int id, string username){
+		this.playerID = id;
+		this.playerUsername = username;
+
+		PlayerPrefs.SetInt("playerID", this.playerID);
+		PlayerPrefs.SetString("playerUsername", this.playerUsername);
+
+		//TODO: load user UI
+
+		StartWebUpdateTimer();
+	}
+
+	public void DidGetGameUpdate(GameState gameState, GameState nextGameState, int timeRemaining, string currentRoundID){
+
+		if(this.gameState != gameState 
+			|| this.currentRoundID != currentRoundID){
+			this.gameState = gameState;
+			this.nextGameState = nextGameState;
+			this.currentRoundID = currentRoundID;
+
+			if(gameState == GameState.WAITING_NEXT_ROUND) {
+				scoreLastRound = score;
+				score = 0;
+				UpdateScoreUI();
+			}
+			else if(gameState == GameState.IN_ROUND) {
+
+			}
+
+			UI_Manager.defaultUI_Manager.UpdateForGameState(gameState, playerUsername, scoreLastRound);
+
+			//TODO: change UI
+		}
+
+		this.nextStateStartTime = Time.time + timeRemaining;
+		this.reportedTimeRemaining = timeRemaining;
 	}
 
 	public void FireClawTop() {
@@ -76,25 +170,22 @@ public class GameManager : MonoBehaviour {
 		//Update score information
 		itemPointWorth = claw.ChangeScore();
 		score += itemPointWorth;
-		scoreText.text = "Score: " + score.ToString();
+		UpdateScoreUI();
 
 		//Reset claw's isReady status
 		claw.isReady = true;
 	}
 
 	void UpdateTimerUI() {
-		time += Time.deltaTime;
-
-		if(seconds < 30) {
-			seconds = time % 60;
-			timerText.text = "Time " + string.Format(":{0:00}", seconds);
-		}
-		else {
-			RoundHasEnded();
-		}
+		timerText.text = "Time " + string.Format(":{0:00}", reportedTimeRemaining);
 	}
 
-	void RoundHasEnded() {
-		roundHasEnded = true;
+	void UpdateScoreUI() {
+		scoreText.text = "Score: " + score.ToString();
+	}
+
+	public void TempSimPlayerScoreIncrease(){
+		score += 1;
+		UpdateScoreUI();
 	}
 }

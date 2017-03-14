@@ -77,15 +77,17 @@ public class Stage : MonoBehaviour {
 
 		//this.transform.rotation = averageRotation;
 
-		Quaternion relativeRotation = Quaternion.Inverse(Input.gyro.attitude) * orientationRotation;//averageRotation;
+		//Quaternion relativeRotation = Quaternion.Inverse(Input.gyro.attitude) * orientationRotation;
+		Quaternion relativeRotation = Quaternion.Inverse(Input.gyro.attitude) * averageRotation;
 
-		float isolatedRotationY = (relativeRotation.eulerAngles.y > 180) ? relativeRotation.eulerAngles.y - 360 : relativeRotation.eulerAngles.y;
+		Debug.Log("relativeRotation: " + relativeRotation.eulerAngles);
+
+		float isolatedRotationY = (relativeRotation.eulerAngles.y > 180) ? relativeRotation.eulerAngles.y: relativeRotation.eulerAngles.y;
+		isolatedRotationY = NormalizeAngle(isolatedRotationY);
 
 		Debug.Log("isolatedRotationY: " + isolatedRotationY);
 
 		Quaternion isolatedRotation = Quaternion.Euler(0, isolatedRotationY, 0);
-
-		Debug.Log("relativeRotation: " + relativeRotation.eulerAngles);
 
 		Debug.Log("isolatedRotation: " + isolatedRotation.eulerAngles);
 
@@ -93,15 +95,15 @@ public class Stage : MonoBehaviour {
 
 		if(Application.isMobilePlatform){
 			Debug.Log("Mobile Platform");
-			targetRotation = Input.gyro.attitude * isolatedRotation * Quaternion.Euler(-90, -90, 0);
+			targetRotation = Input.gyro.attitude * isolatedRotation * Quaternion.Euler(-90, 0, 0);
 		}
 		else {
 			Debug.Log("Other Platform");
 			targetRotation = Input.gyro.attitude * isolatedRotation * Quaternion.Euler(-90, 0, 0);
 		}
 
-		Vector3 lerpedAngle = AngleLerp(this.transform.rotation.eulerAngles, targetRotation.eulerAngles, Time.deltaTime);
-		targetRotation = Quaternion.Euler(lerpedAngle);
+		//Vector3 lerpedAngle = AngleLerp(this.transform.rotation.eulerAngles, targetRotation.eulerAngles, Time.deltaTime);
+		//targetRotation = Quaternion.Euler(lerpedAngle);
 		this.transform.rotation = targetRotation;
 
 //		Vector3 temp = -(Input.acceleration.normalized);
@@ -122,9 +124,14 @@ public class Stage : MonoBehaviour {
 	}
 
 	float NormalizeAngle(float angle) {
-		if(angle < 0){
-			//angle += 360;
+		while(angle < -180){
+			angle += 360;
 		}
+
+		while(angle >= 180){
+			angle -= 360;
+		}
+		
 		return angle;
 	}
 
