@@ -11,10 +11,6 @@ public class GameManager : MonoBehaviour {
 	Vector3 clawStartPosition;
 
 	Text scoreText;
-	Text timerText;
-
-	float time = 0;
-	float seconds = 0;
 
 	int score = 0;
 	int scoreLastRound = 0;
@@ -47,7 +43,6 @@ public class GameManager : MonoBehaviour {
 		clawStartPosition = claw.gameObject.transform.position;
 
 		scoreText = GameObject.Find("Canvas").transform.Find("ScoreText").GetComponent<Text>();
-		timerText = GameObject.Find("Canvas").transform.Find("TimerText").GetComponent<Text>();
 
 		webRequestManager = new WebRequestManager();
 	}
@@ -81,11 +76,6 @@ public class GameManager : MonoBehaviour {
 				TweenHelper.defaultTweenHelper.TweenMove(claw.gameObject, .25f, claw.clawBottomTarget.transform.position, DidFinishAnimatingClawToTarget);
 			}
 			#endif
-
-
-
-			//Update the timer
-			UpdateTimerUI();
 		}
 
 		if(shouldFireWebUpdate){
@@ -174,10 +164,6 @@ public class GameManager : MonoBehaviour {
 
 		//Reset claw's isReady status
 		claw.isReady = true;
-	}
-
-	void UpdateTimerUI() {
-		timerText.text = "Time " + string.Format(":{0:00}", reportedTimeRemaining);
 	}
 
 	void UpdateScoreUI() {

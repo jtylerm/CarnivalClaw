@@ -1,17 +1,31 @@
 fileFormatVersion: 2
-guid: 435987c998aea4405846130a56d70fd5
-timeCreated: 1485979488
+guid: 17791287c8ec54109afc908b2bd1d10e
+timeCreated: 1489791852
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Camera
+    100004: Cylinder
+    100006: Cylinder.001
+    100008: Icosphere
+    100010: Lamp
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Bag
-    7400000: Default Take
-    9500000: //RootNode
+    400002: Camera
+    400004: Cylinder
+    400006: Cylinder.001
+    400008: Icosphere
+    400010: Lamp
+    2300000: Cylinder
+    2300002: Cylinder.001
+    2300004: Icosphere
+    3300000: Cylinder
+    3300002: Cylinder.001
+    3300004: Icosphere
+    4300000: Cylinder.001
+    4300002: Cylinder
+    4300004: Icosphere
   materials:
     importMaterials: 1
     materialName: 0
@@ -74,7 +88,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
