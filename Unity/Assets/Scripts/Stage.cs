@@ -12,7 +12,6 @@ public class Stage : MonoBehaviour {
 	private float TIME_WINDOW = 1;
 
 
-
 	void Awake() {
 
 	}
@@ -24,14 +23,30 @@ public class Stage : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		//if(this.transform.parent == null && orientationObj != null){
+		if(this.transform.parent == null 
+			&& this.orientationObj != null)
+		{
+			this.transform.parent = orientationObj.transform;
+		}
+
+		this.transform.localPosition = Vector3.zero;
+		this.transform.localRotation = Quaternion.identity;
+
+		return; 
+
+		/*
 		//this.transform.position = orientationObj.transform.position;
 		Quaternion orientationRotation = orientationObj.transform.rotation;
 
 		Vector3 objEulerRot = orientationObj.transform.rotation.eulerAngles;
 		if(objEulerRot.x == 0 && objEulerRot.y == 0 && objEulerRot.z == 0)
 		{
+			//if orientation object not rotated, it's likely not being recognized
 			return;
 		}
+
 
 		TransformRecord transformRecord = new TransformRecord();
 		transformRecord.position = orientationObj.transform.position;
@@ -119,7 +134,7 @@ public class Stage : MonoBehaviour {
 		//Align(gravityObj.transform.forward, gravityObj.transform.right);
 
 		//this.transform.rotation *= Quaternion.Euler(Vector3.right * -90);
-
+		*/
 
 	}
 

@@ -13,7 +13,7 @@ var GameState = {
 
 var TIME_BETWEEN_ROUNDS = 10 * 1000;
 
-var ROUND_DURATION = 10 * 1000;
+var ROUND_DURATION = 45 * 1000;
 
 
 

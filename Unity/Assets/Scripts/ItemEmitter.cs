@@ -27,11 +27,33 @@ public class ItemEmitter : MonoBehaviour {
 
 		int randomIndex = Random.Range(0,4);
 
-		GameObject itemGameObject = GameObject.Instantiate(this.templateGameObjects[randomIndex]);
-		itemGameObject.transform.position = this.transform.position;
-		itemGameObject.transform.up = targetTransform.up;
-		itemGameObject.transform.parent = targetTransform.parent;
+		GameObject itemGameObject = GameObject.Instantiate(this.templateGameObjects[randomIndex], targetTransform.parent);
+		itemGameObject.transform.localPosition = this.transform.localPosition;
+
+//		itemGameObject.transform.up = targetTransform.up;
+//		itemGameObject.transform.forward = targetTransform.forward;
+		//itemGameObject.transform.up = this.transform.worldToLocalMatrix.MultiplyVector(targetTransform.up);
+
+//		Quaternion itemRotation = itemGameObject.transform.localRotation;
+//		Debug.Log("item rotation: " + itemRotation);
+//		Vector3 itemEuler = itemRotation.eulerAngles;
+//		Vector3 euler = this.transform.eulerAngles;
+//		itemRotation = Quaternion.Euler(itemEuler.x + euler.x, itemEuler.y + euler.y, itemEuler.z + euler.z);
+//		Debug.Log("new item rotation: " + itemRotation);
+//		itemGameObject.transform.localRotation = itemRotation;
+
+		itemGameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+//		Vector3 targetScale = targetTransform.lossyScale;
+//		Vector3 itemLocalScale = itemGameObject.transform.localScale;
+//		Debug.Log("scale: " + targetScale + ", itemLocalScale: " + itemLocalScale);
+//		itemLocalScale = Vector3.Scale(targetScale, itemLocalScale);
+//		Debug.Log("new itemLocalScale: " + itemLocalScale);
+//		//itemGameObject.transform.localScale = itemLocalScale;
+
+		//itemGameObject.transform.parent = targetTransform.parent;
 		Item item = itemGameObject.GetComponent<Item>();
 		item.targetTransform = this.targetTransform;
 	}
+
 }

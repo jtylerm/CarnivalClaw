@@ -1,37 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using Vuforia;
 
 public class GameManager : MonoBehaviour {
 	
 	public static GameManager defaultGameManager = null;
 
+	WebRequestManager webRequestManager = null;
+
+	//private List<TrackableImageTarget> trackableImageTargets = new List<TrackableImageTarget>();
+
 	Claw claw;
 	Vector3 clawStartPosition;
 
-	Text scoreText;
+	Stage stage = null;
 
 	int score = 0;
 	int scoreLastRound = 0;
 	int itemPointWorth = 0;
 
-	WebRequestManager webRequestManager = null;
-
-
+	bool hasPlayer = false;
 	int playerID = -1;
 	string playerUsername = null;
 
-
-
+	bool hasWaited = false;
 	GameState gameState = GameState.UNSPECIFIED;
 	GameState nextGameState = GameState.UNSPECIFIED;
 	float nextStateStartTime = 0;
 	float reportedTimeRemaining = 0;
 	string currentRoundID = null;
 
+	TrackableImageTarget activeImageTarget = null;
+
 	float lastWebUpdateTime = 0;
-	bool shouldFireWebUpdate = false;
 
 	void Awake() {
 		PlayerPrefs.DeleteAll();
@@ -40,9 +42,7 @@ public class GameManager : MonoBehaviour {
 
 		claw = GameObject.Find("Claw").GetComponent<Claw>();
 
-		clawStartPosition = claw.gameObject.transform.position;
-
-		scoreText = GameObject.Find("Canvas").transform.Find("ScoreText").GetComponent<Text>();
+		stage = GameObject.Find("Stage").GetComponent<Stage>();
 
 		webRequestManager = new WebRequestManager();
 	}
@@ -50,16 +50,20 @@ public class GameManager : MonoBehaviour {
 	void Start() {
 
 		if(PlayerPrefs.HasKey("playerID")){
+			
 			this.playerID = PlayerPrefs.GetInt("playerID");
 			this.playerUsername = PlayerPrefs.GetString("playerUsername");
 
-			//TODO: load user UI
+			UI_Manager.defaultUI_Manager.UpdateForGameState(GameState.WAITING_NEXT_ROUND, playerUsername, scoreLastRound);
 
-			StartWebUpdateTimer();
+			this.hasPlayer = true;
 		}
 		else {
-			StartCoroutine(webRequestManager.GetNewUser());
+			//no local player data
+			UI_Manager.defaultUI_Manager.ShowNewUserPanel();
 		}
+
+		claw.isReady = true;
 	}
 
 	void Update() {
@@ -76,26 +80,34 @@ public class GameManager : MonoBehaviour {
 				TweenHelper.defaultTweenHelper.TweenMove(claw.gameObject, .25f, claw.clawBottomTarget.transform.position, DidFinishAnimatingClawToTarget);
 			}
 			#endif
+
+			if(activeImageTarget != null) {
+				UI_Manager.defaultUI_Manager.SetARWarningPanelVisible(false);
+			}
+			else {
+				UI_Manager.defaultUI_Manager.SetARWarningPanelVisible(true);
+			}
 		}
 
-		if(shouldFireWebUpdate){
+		if(this.hasPlayer && activeImageTarget != null){
 
 			if(Time.time - lastWebUpdateTime > 1){
 				//Debug.Log("web update time diff: " + (Time.time - lastWebUpdateTime));
 				lastWebUpdateTime = Time.time;
-				//TODO: get index of selected target image
-				int orientationImageIndex = 0;
+
+				//get index of selected target image
+				int orientationImageIndex = (activeImageTarget != null) ? activeImageTarget.index - 1 : -1;
 
 				StartCoroutine(webRequestManager.SendPlayerUpdate(orientationImageIndex, this.playerID, this.score, this.currentRoundID));
 			}
 		}
 
 	}
-
-	void StartWebUpdateTimer(){
-		shouldFireWebUpdate = true;
-	}
 		
+	public void DidSelectGetNewUser(){
+		StartCoroutine(webRequestManager.GetNewUser());
+	}
+
 	public void DidGetNewUser(int id, string username){
 		this.playerID = id;
 		this.playerUsername = username;
@@ -103,15 +115,23 @@ public class GameManager : MonoBehaviour {
 		PlayerPrefs.SetInt("playerID", this.playerID);
 		PlayerPrefs.SetString("playerUsername", this.playerUsername);
 
-		//TODO: load user UI
+		//hide new user UI
+		UI_Manager.defaultUI_Manager.HideNewUserPanel();
 
-		StartWebUpdateTimer();
+		this.hasPlayer = true;
 	}
 
 	public void DidGetGameUpdate(GameState gameState, GameState nextGameState, int timeRemaining, string currentRoundID){
 
+		if(!hasWaited && gameState == GameState.IN_ROUND){
+			gameState = GameState.WAITING_NEXT_ROUND;
+		}
+		else if(!hasWaited && gameState == GameState.WAITING_NEXT_ROUND){
+			hasWaited = true;
+		}
 		if(this.gameState != gameState 
 			|| this.currentRoundID != currentRoundID){
+
 			this.gameState = gameState;
 			this.nextGameState = nextGameState;
 			this.currentRoundID = currentRoundID;
@@ -119,15 +139,12 @@ public class GameManager : MonoBehaviour {
 			if(gameState == GameState.WAITING_NEXT_ROUND) {
 				scoreLastRound = score;
 				score = 0;
-				UpdateScoreUI();
 			}
 			else if(gameState == GameState.IN_ROUND) {
 
 			}
 
 			UI_Manager.defaultUI_Manager.UpdateForGameState(gameState, playerUsername, scoreLastRound);
-
-			//TODO: change UI
 		}
 
 		this.nextStateStartTime = Time.time + timeRemaining;
@@ -137,41 +154,70 @@ public class GameManager : MonoBehaviour {
 	public void FireClawTop() {
 		if(claw.isReady == true) {
 			claw.isReady = false;
-			TweenHelper.defaultTweenHelper.TweenMove(claw.gameObject, .25f, claw.clawTopTarget.transform.position, DidFinishAnimatingClawToTarget);
+			clawStartPosition = claw.gameObject.transform.localPosition;
+			TweenHelper.defaultTweenHelper.TweenMoveLocal(claw.gameObject, .25f, claw.clawTopTarget.transform.localPosition, DidFinishAnimatingClawToTarget);
 		}
 	}
 
 	public void FireClawBottom() {
 		if(claw.isReady == true) {
 			claw.isReady = false;
-			TweenHelper.defaultTweenHelper.TweenMove(claw.gameObject, .25f, claw.clawBottomTarget.transform.position, DidFinishAnimatingClawToTarget);
+			TweenHelper.defaultTweenHelper.TweenMoveLocal(claw.gameObject, .25f, claw.clawBottomTarget.transform.localPosition, DidFinishAnimatingClawToTarget);
 		}
 	}
 
 	void DidFinishAnimatingClawToTarget(GameObject gameObject) {
-		TweenHelper.defaultTweenHelper.TweenMove(claw.gameObject, .25f, clawStartPosition, DidFinishAnimatingClawToStart);
+		TweenHelper.defaultTweenHelper.TweenMoveLocal(claw.gameObject, .25f, clawStartPosition, DidFinishAnimatingClawToStart);
 	}
 
 	void DidFinishAnimatingClawToStart(GameObject gameObject) {
 
+		if(gameState == GameState.IN_ROUND){
+			//Update score information
+			itemPointWorth = claw.GetPoints();
+			score += itemPointWorth;
+			UI_Manager.defaultUI_Manager.UpdateGameplayScore(score);
+		}
+			
 		//Destroy child game object from scene
-		claw.DestroyChildItem();
-
-		//Update score information
-		itemPointWorth = claw.ChangeScore();
-		score += itemPointWorth;
-		UpdateScoreUI();
+		claw.DestroyChildItems();
 
 		//Reset claw's isReady status
 		claw.isReady = true;
 	}
 
-	void UpdateScoreUI() {
-		scoreText.text = "Score: " + score.ToString();
+
+
+//	public void TempSimPlayerScoreIncrease(){
+//		score += 1;
+//		UI_Manager.defaultUI_Manager.UpdateGameplayScore(score);
+//	}
+
+	//vuforia
+
+//	void RegisterTrackableImageTargets(){
+//		TrackableImageTarget trackableImageTarget = null;
+//
+//		GameObject arCamera = GameObject.Find("ARCamera");
+//
+//		for(int i = 0; i < 6; i++){
+//			trackableImageTarget = arCamera.transform.Find("ImageTarget" + i).GetComponent<TrackableImageTarget>();
+//			if (trackableImageTarget != null)
+//			{
+//				trackableImageTargets.Add(trackableImageTarget);
+//			}
+//		}
+//	}
+
+	public void DidRecognizeImageTarget(TrackableImageTarget imageTarget){
+		activeImageTarget = imageTarget;
+		stage.orientationObj = imageTarget.gameObject;
 	}
 
-	public void TempSimPlayerScoreIncrease(){
-		score += 1;
-		UpdateScoreUI();
+	public void DidLoseImageTarget(TrackableImageTarget imageTarget){
+		activeImageTarget = null;
+		stage.orientationObj = null;
 	}
+
+	  
 }

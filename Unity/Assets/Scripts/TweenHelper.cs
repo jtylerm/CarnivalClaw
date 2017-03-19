@@ -32,6 +32,17 @@ public class TweenHelper : MonoBehaviour {
 					tweenItem.MoveTowardsTarget();
 				}
 			}
+			else if(tweenItem.type == TweenItemType.MoveLocal) {
+				if(tweenItem.HasReachedTargetPositionLocal()) {
+					tweenItem.SnapToTargetPositionLocal();
+
+					tweenItems.Remove(tweenItem);
+					tweenItem.tweenMoveCallbackDelegate(tweenItem.gameObject);
+				}
+				else {
+					tweenItem.MoveTowardsTargetLocal();
+				}
+			}
 			else if(tweenItem.type == TweenItemType.Rotate) {
 				if(tweenItem.HasReachedTargetRotation()) {
 					tweenItem.SnapToTargetRotation();
@@ -52,6 +63,18 @@ public class TweenHelper : MonoBehaviour {
 		tweenItem.duration = duration;
 		tweenItem.startPosition = gameObject.transform.position;
 		tweenItem.targetPosition = targetPosition;
+		tweenItem.tweenMoveCallbackDelegate = callbackDelegate;
+
+		tweenItems.Add(tweenItem);
+	}
+
+	public void TweenMoveLocal(GameObject gameObject, double duration, Vector3 localTargetPosition, TweenItem.TweenMoveCallbackDelegate callbackDelegate) {
+		TweenItem tweenItem = new TweenItem();
+		tweenItem.type = TweenItemType.MoveLocal;
+		tweenItem.gameObject = gameObject;
+		tweenItem.duration = duration;
+		tweenItem.localStartPosition = gameObject.transform.localPosition;
+		tweenItem.localTargetPosition = localTargetPosition;
 		tweenItem.tweenMoveCallbackDelegate = callbackDelegate;
 
 		tweenItems.Add(tweenItem);
