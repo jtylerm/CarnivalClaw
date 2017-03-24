@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using mixpanel;
 
 public class WebRequestManager : System.Object {
 
@@ -24,6 +25,10 @@ public class WebRequestManager : System.Object {
 
 		if(!string.IsNullOrEmpty(web.error)) {
 			Debug.Log("GetNewUser: " + web.error);
+
+			Value props = new Value();
+			props["error"] = new Value(web.error);
+			Mixpanel.Track("WebRequestManager.GetNewUser.Failed", props);
 		}
 		else {
 			Debug.Log("guest user json: " + web.text);
@@ -55,6 +60,10 @@ public class WebRequestManager : System.Object {
 
 		if(!string.IsNullOrEmpty(web.error)) {
 			Debug.Log("SendPlayerUpdate: " + web.error);
+
+			Value props = new Value();
+			props["error"] = new Value(web.error);
+			Mixpanel.Track("WebRequestManager.SendPlayerUpdate.Failed", props);
 		}
 		else {
 			Debug.Log("player update json: " + web.text);

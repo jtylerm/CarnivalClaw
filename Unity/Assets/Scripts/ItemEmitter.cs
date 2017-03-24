@@ -25,9 +25,26 @@ public class ItemEmitter : MonoBehaviour {
 
 	void EmitItem() {
 
-		int randomIndex = Random.Range(0,4);
+		GameObject itemGameObject = null;
+		int random = Random.Range(1,41);
 
-		GameObject itemGameObject = GameObject.Instantiate(this.templateGameObjects[randomIndex], targetTransform.parent);
+		if(random >= 1 && random <= 11) {
+			itemGameObject = GameObject.Instantiate(this.templateGameObjects[0], targetTransform.parent);
+		}
+		else if(random >= 12 && random <= 22) {
+			itemGameObject = GameObject.Instantiate(this.templateGameObjects[1], targetTransform.parent);
+		}
+		else if(random >= 23 && random <= 33) {
+			itemGameObject = GameObject.Instantiate(this.templateGameObjects[2], targetTransform.parent);
+		}
+		else if(random >= 34 && random <= 38) {
+			itemGameObject = GameObject.Instantiate(this.templateGameObjects[3], targetTransform.parent);
+		}
+		else if(random == 39 || random == 40) {
+			itemGameObject = GameObject.Instantiate(this.templateGameObjects[4], targetTransform.parent);
+		}
+
+
 		itemGameObject.transform.localPosition = this.transform.localPosition;
 
 //		itemGameObject.transform.up = targetTransform.up;

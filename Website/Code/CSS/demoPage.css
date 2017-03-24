@@ -1,0 +1,107 @@
+body {
+  background: blueviolet; }
+
+.underlined {
+  border-bottom: 5px solid mintcream; }
+
+.imageBorder {
+  border: 5px solid mintcream; }
+
+#demoHeader {
+  background: #e22bdf;
+  height: 100px;
+  text-align: center; }
+
+#demoText {
+  font-family: "Fredoka One", cursive;
+  color: mintcream;
+  font-size: 40px;
+  line-height: 100px; }
+
+#logoContainer {
+  background: #00bbcc;
+  text-align: center;
+  padding-bottom: 20px; }
+
+#logoImage {
+  padding-bottom: 20px; }
+
+#orientationImageContainer {
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 20px; }
+
+#orientationImageText {
+  font-family: "Acme", sans-serif;
+  font-size: 30px;
+  color: mintcream; }
+
+#gameInfoContainer {
+  background: #e28a2b; }
+  #gameInfoContainer h1 {
+    padding-top: 30px;
+    text-align: center;
+    font-family: "Fredoka One", cursive;
+    font-size: 40px;
+    color: mintcream; }
+  #gameInfoContainer p {
+    padding-left: 20%;
+    text-align: left;
+    font-size: 30px;
+    font-family: "Acme", sans-serif;
+    color: mintcream; }
+
+#gameInfoText {
+  padding-bottom: 20px; }
+
+#websiteScreenshotContainer {
+  text-align: center;
+  background: #e22bdf;
+  padding-top: 40px;
+  padding-bottom: 10px; }
+  #websiteScreenshotContainer p {
+    font-size: 30px;
+    font-family: "Acme", sans-serif;
+    color: mintcream; }
+  #websiteScreenshotContainer img {
+    width: 80%; }
+
+#videoContainer {
+  background: #00bbcc;
+  height: 700px;
+  width: 100%;
+  text-align: center;
+  padding-top: 55px; }
+  #videoContainer p {
+    font-size: 30px;
+    font-family: "Acme", sans-serif;
+    color: mintcream; }
+
+#video {
+  margin: auto; }
+
+#demoImagesInfoContainer {
+  color: mintcream;
+  background: blueviolet;
+  text-align: center; }
+  #demoImagesInfoContainer p {
+    font-size: 30px;
+    font-family: "Acme", sans-serif;
+    color: mintcream;
+    margin: 0;
+    padding-bottom: 10px; }
+
+#demoImagesContainer {
+  padding-top: 40px;
+  text-align: center;
+  display: inline-block; }
+
+#demoImageContainer1 {
+  float: left;
+  width: 800px; }
+
+#demoImageContainer2 {
+  float: right;
+  width: 800px; }
+
+/*# sourceMappingURL=demoPage.css.map */

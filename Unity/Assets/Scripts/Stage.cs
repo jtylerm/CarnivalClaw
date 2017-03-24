@@ -11,6 +11,8 @@ public class Stage : MonoBehaviour {
 
 	private float TIME_WINDOW = 1;
 
+	private float scaleWithParent = 1;
+
 
 	void Awake() {
 
@@ -29,12 +31,27 @@ public class Stage : MonoBehaviour {
 			&& this.orientationObj != null)
 		{
 			this.transform.parent = orientationObj.transform;
+
+			this.scaleWithParent = this.transform.localScale.x;
+
+			// SCALE
+			float scaleMultiplier = 0.6f;
+			float scale = this.scaleWithParent * scaleMultiplier; 
+			this.transform.localScale = new Vector3(scale, scale, scale);
+
+			//POSITION
+			//this.transform.localPosition = Vector3.zero;
+			float zPositionOffset = -1.3f;
+			this.transform.localPosition = new Vector3(0, 0, zPositionOffset);
+
+			//ROTATION
+			this.transform.localRotation = Quaternion.identity;
 		}
 
-		this.transform.localPosition = Vector3.zero;
-		this.transform.localRotation = Quaternion.identity;
+		if(this.orientationObj != null){
 
-		return; 
+
+		}
 
 		/*
 		//this.transform.position = orientationObj.transform.position;

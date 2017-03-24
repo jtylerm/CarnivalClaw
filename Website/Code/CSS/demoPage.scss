@@ -1,0 +1,155 @@
+//Variables
+$color1: blueviolet;
+$color2: #00bbcc;
+$color3: #e22bdf;
+$color4: #e28a2b;
+$color5: mintcream;
+$fontFredoka: 'Fredoka One', cursive;
+$fontAcme: 'Acme', sans-serif;
+
+//Elements
+body {
+  background: $color1;
+}
+
+//Classes
+.underlined {
+  border-bottom: 5px solid $color5;
+}
+
+.imageBorder {
+  border: 5px solid $color5;
+}
+
+//IDs
+
+//Demo divs
+#demoHeader {
+  background: $color3;
+  height: 100px;
+  text-align: center;
+}
+
+#demoText {
+  font-family: $fontFredoka;
+  color: $color5;
+  font-size: 40px;
+  line-height: 100px;
+}
+
+//Logo divs
+#logoContainer {
+  background: $color2;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+#logoImage {
+  padding-bottom: 20px;
+}
+
+//Orientation image divs
+#orientationImageContainer {
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+#orientationImage {
+
+}
+
+#orientationImageText {
+  font-family: $fontAcme;
+  font-size: 30px;
+  color: $color5;
+}
+
+//Game Info divs
+#gameInfoContainer {
+  background: $color4;
+  h1 {
+    padding-top: 30px;
+    text-align: center;
+    font-family: $fontFredoka;
+    font-size: 40px;
+    color: $color5;
+  }
+  p {
+    padding-left: 20%;
+    text-align: left;
+    font-size: 30px;
+    font-family: $fontAcme;
+    color: $color5;
+  }
+}
+
+#gameInfoText {
+  padding-bottom: 20px;
+}
+
+//Website Screenshot divs
+#websiteScreenshotContainer {
+  text-align:center;
+  background: $color3;
+  padding-top: 40px;
+  padding-bottom: 10px;
+  p {
+    font-size: 30px;
+    font-family: $fontAcme;
+    color: $color5;
+  }
+  img {
+    width: 80%;
+  }
+}
+
+//Video Container divs
+#videoContainer {
+  background: $color2;
+  height: 700px;
+  width: 100%;
+  text-align: center;
+  padding-top: 55px;
+  p {
+    font-size: 30px;
+    font-family: $fontAcme;
+    color: $color5;
+  }
+}
+
+#video {
+  margin: auto;
+}
+
+//Demo Images divs
+#demoImagesInfoContainer {
+  color: $color5;
+  background: $color1;
+  //height: 700px;
+  text-align: center;
+
+  p {
+    font-size: 30px;
+    font-family: $fontAcme;
+    color: $color5;
+    margin: 0;
+    padding-bottom: 10px;
+  }
+}
+
+#demoImagesContainer {
+  padding-top: 40px;
+  text-align: center;
+  display: inline-block;
+}
+
+#demoImageContainer1 {
+  float: left;
+  width: 800px;
+}
+
+#demoImageContainer2 {
+  float: right;
+  width: 800px;
+}

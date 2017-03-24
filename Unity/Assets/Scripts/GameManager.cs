@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
+using mixpanel;
 
 public class GameManager : MonoBehaviour {
 	
@@ -24,7 +25,6 @@ public class GameManager : MonoBehaviour {
 	int playerID = -1;
 	string playerUsername = null;
 
-	bool hasWaited = false;
 	GameState gameState = GameState.UNSPECIFIED;
 	GameState nextGameState = GameState.UNSPECIFIED;
 	float nextStateStartTime = 0;
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour {
 	float lastWebUpdateTime = 0;
 
 	void Awake() {
-		PlayerPrefs.DeleteAll();
+		//PlayerPrefs.DeleteAll();
 
 		defaultGameManager = this;
 
@@ -49,10 +49,15 @@ public class GameManager : MonoBehaviour {
 
 	void Start() {
 
+		Mixpanel.Track("App.Launched");
+
 		if(PlayerPrefs.HasKey("playerID")){
 			
 			this.playerID = PlayerPrefs.GetInt("playerID");
 			this.playerUsername = PlayerPrefs.GetString("playerUsername");
+
+			Mixpanel.Register("UserID", this.playerID);
+			Mixpanel.Track("App.DidLoadExistingUser");
 
 			UI_Manager.defaultUI_Manager.UpdateForGameState(GameState.WAITING_NEXT_ROUND, playerUsername, scoreLastRound);
 
@@ -64,6 +69,7 @@ public class GameManager : MonoBehaviour {
 		}
 
 		claw.isReady = true;
+
 	}
 
 	void Update() {
@@ -98,6 +104,8 @@ public class GameManager : MonoBehaviour {
 				//get index of selected target image
 				int orientationImageIndex = (activeImageTarget != null) ? activeImageTarget.index - 1 : -1;
 
+				
+
 				StartCoroutine(webRequestManager.SendPlayerUpdate(orientationImageIndex, this.playerID, this.score, this.currentRoundID));
 			}
 		}
@@ -105,12 +113,15 @@ public class GameManager : MonoBehaviour {
 	}
 		
 	public void DidSelectGetNewUser(){
+		Mixpanel.Track("App.DidSelectGetNewUser");
 		StartCoroutine(webRequestManager.GetNewUser());
 	}
 
 	public void DidGetNewUser(int id, string username){
 		this.playerID = id;
 		this.playerUsername = username;
+
+		Mixpanel.Register("UserID", this.playerID);
 
 		PlayerPrefs.SetInt("playerID", this.playerID);
 		PlayerPrefs.SetString("playerUsername", this.playerUsername);
@@ -119,16 +130,12 @@ public class GameManager : MonoBehaviour {
 		UI_Manager.defaultUI_Manager.HideNewUserPanel();
 
 		this.hasPlayer = true;
+
+		Mixpanel.Track("App.DidGetNewUser");
 	}
 
 	public void DidGetGameUpdate(GameState gameState, GameState nextGameState, int timeRemaining, string currentRoundID){
 
-		if(!hasWaited && gameState == GameState.IN_ROUND){
-			gameState = GameState.WAITING_NEXT_ROUND;
-		}
-		else if(!hasWaited && gameState == GameState.WAITING_NEXT_ROUND){
-			hasWaited = true;
-		}
 		if(this.gameState != gameState 
 			|| this.currentRoundID != currentRoundID){
 
@@ -143,6 +150,10 @@ public class GameManager : MonoBehaviour {
 			else if(gameState == GameState.IN_ROUND) {
 
 			}
+
+			Value props = new Value();
+			props["gameState"] = new Value(this.gameState.ToString());
+			Mixpanel.Track("App.DidGetGameUpdate.GameStateChanged", props);
 
 			UI_Manager.defaultUI_Manager.UpdateForGameState(gameState, playerUsername, scoreLastRound);
 		}
@@ -212,11 +223,19 @@ public class GameManager : MonoBehaviour {
 	public void DidRecognizeImageTarget(TrackableImageTarget imageTarget){
 		activeImageTarget = imageTarget;
 		stage.orientationObj = imageTarget.gameObject;
+
+		Value props = new Value();
+		props["imageTargetIndex"] = new Value(imageTarget.index.ToString());
+		Mixpanel.Track("App.DidRecognizeImageTarget", props);
 	}
 
 	public void DidLoseImageTarget(TrackableImageTarget imageTarget){
 		activeImageTarget = null;
 		stage.orientationObj = null;
+
+		Value props = new Value();
+		props["imageTargetIndex"] = new Value(imageTarget.index.ToString());
+		Mixpanel.Track("App.DidLoseImageTarget", props);
 	}
 
 	  
