@@ -21,6 +21,8 @@ public class UI_Manager : MonoBehaviour {
 
 	public GameObject arWarningPanel;
 
+	public GameObject instructionsPanel;
+
 	public Text usernameText;
 	public Text gameplayScoreText;
 
@@ -32,8 +34,8 @@ public class UI_Manager : MonoBehaviour {
 //		normalAfterRoundInfoPanel = GameObject.Find("Canvas").transform.Find("NormalAfterRoundInfoPanel").gameObject;
 //		normalAfterRoundInfoPanel.SetActive(true);
 //		recordBreakAfterRoundInfoPanel = GameObject.Find("Canvas").transform.Find("RecordBreakAfterRoundInfoPanel").gameObject;
-//		usernameText = afterRoundInfoPanel.transform.Find("UsernameText").GetComponent<Text>();
-//		afterRoundScoreText = afterRoundInfoPanel.transform.Find("ScoreText").GetComponent<Text>();
+//		normalUsernameText = afterRoundInfoPanel.transform.Find("NormalUsernameText").GetComponent<Text>();
+//		normalAfterRoundScoreText = afterRoundInfoPanel.transform.Find("NormalScoreText").GetComponent<Text>();
 //
 //		newUserPanel = GameObject.Find("Canvas").transform.Find("NewUserPanel").gameObject;
 //
@@ -49,19 +51,7 @@ public class UI_Manager : MonoBehaviour {
 		
 	}
 
-	public void UpdateForGameState(GameState gameState, string username, int score) {
-		if(gameState == GameState.IN_ROUND) {
-			afterRoundInfoPanel.SetActive(false);
-			gameplayUIPanel.SetActive(true);
-		}
-		else {
-			afterRoundInfoPanel.SetActive(true);
 
-			usernameText.text = username;
-
-			UpdateAfterRoundScore(score);
-		}
-	}
 
 	public void UpdateAfterRoundScore(int score) {
 		Debug.Log("score: " + score);
@@ -79,6 +69,36 @@ public class UI_Manager : MonoBehaviour {
 
 	public void HideNewUserPanel(){
 		newUserPanel.SetActive(false);
+
+		//tell user to aim camera at orientation image
+		this.ShowInstructionsPanel();
+	}
+
+	public void ShowInstructionsPanel(){
+		instructionsPanel.SetActive(true);
+	}
+
+	public void HideInstructionsPanel(){
+		instructionsPanel.SetActive(false);
+		GameManager.defaultGameManager.DidHideInstructionsPanel();
+	}
+
+	public void ShowGameplayPanel(){
+		gameplayUIPanel.SetActive(true);
+	}
+
+	public void HideGameplayPanel(){
+		gameplayUIPanel.SetActive(false);
+	}
+
+	public void SetUsername(string username){
+		usernameText.text = username;
+	}
+
+	public void SetAfterRoundInfoVisible(bool visible) {
+		if(afterRoundInfoPanel.activeSelf != visible) {
+			afterRoundInfoPanel.SetActive(visible);
+		}
 	}
 
 	public void SetARWarningPanelVisible(bool visible) {

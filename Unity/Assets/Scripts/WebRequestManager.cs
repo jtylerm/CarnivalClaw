@@ -5,8 +5,8 @@ using mixpanel;
 
 public class WebRequestManager : System.Object {
 
-	//public static string BASE_URL = "http://192.168.1.67:8081";
-	public static string BASE_URL = "http://groupargame-dev.us-east-1.elasticbeanstalk.com";
+	public static string BASE_URL = "http://192.168.1.67:3000";
+	//public static string BASE_URL = "http://groupargame-dev.us-east-1.elasticbeanstalk.com";
 
 	public static string WEB_API_PATH = BASE_URL + "/api";
 
@@ -37,12 +37,13 @@ public class WebRequestManager : System.Object {
 
 			int id = response.id;
 			string username = response.username;
+			string subID = response.subID;
 
-			GameManager.defaultGameManager.DidGetNewUser(id, username);
+			GameManager.defaultGameManager.DidGetNewUser(id, username, subID);
 		}
 	}
 
-	public IEnumerator SendPlayerUpdate(int orientationImageIndex, int playerID, int score, string roundID) {
+	public IEnumerator SendPlayerUpdate(int orientationImageIndex, int playerID, string playerSubID, int score, string roundID) {
 		//yield return new WaitForEndOfFrame();
 
 		playerUpdateID++;
@@ -50,9 +51,10 @@ public class WebRequestManager : System.Object {
 		string url = WEB_ENDPOINT_PLAYER_UPDATE + "?update_id=" + playerUpdateID 
 			+ "&orientation_image_index=" + orientationImageIndex 
 			+ "&player_id=" + playerID
+			+ "&player_sub_id=" + playerSubID
 			+ "&score=" + score
 			+ "&round_id=" + roundID;
-		//Debug.Log("SendPlayerUpdate - URL: " + url);
+		Debug.Log("SendPlayerUpdate - URL: " + url);
 
 		WWWForm form = new WWWForm();
 		WWW web = new WWW(url);

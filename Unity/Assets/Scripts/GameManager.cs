@@ -17,13 +17,18 @@ public class GameManager : MonoBehaviour {
 
 	Stage stage = null;
 
+	bool isGameplayEnabled = false;
+
 	int score = 0;
 	int scoreLastRound = 0;
 	int itemPointWorth = 0;
 
+	int orientationImageIndex = -1;
+
 	bool hasPlayer = false;
 	int playerID = -1;
 	string playerUsername = null;
+	string playerSubID = null;
 
 	GameState gameState = GameState.UNSPECIFIED;
 	GameState nextGameState = GameState.UNSPECIFIED;
@@ -36,7 +41,7 @@ public class GameManager : MonoBehaviour {
 	float lastWebUpdateTime = 0;
 
 	void Awake() {
-		//PlayerPrefs.DeleteAll();
+		PlayerPrefs.DeleteAll();
 
 		defaultGameManager = this;
 
@@ -55,11 +60,10 @@ public class GameManager : MonoBehaviour {
 			
 			this.playerID = PlayerPrefs.GetInt("playerID");
 			this.playerUsername = PlayerPrefs.GetString("playerUsername");
+			this.playerSubID = PlayerPrefs.GetString("playerSubID");
 
 			Mixpanel.Register("UserID", this.playerID);
 			Mixpanel.Track("App.DidLoadExistingUser");
-
-			UI_Manager.defaultUI_Manager.UpdateForGameState(GameState.WAITING_NEXT_ROUND, playerUsername, scoreLastRound);
 
 			this.hasPlayer = true;
 		}
@@ -73,43 +77,15 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Update() {
-		if(gameState == GameState.IN_ROUND) {
-
-			//keyboard commands for when not building mobile
-			#if !UNITY_ANDROID && !UNITY_IOS
-			if(Input.GetMouseButtonDown(0) && claw.isReady) {
-				claw.isReady = false;
-				TweenHelper.defaultTweenHelper.TweenMove(claw.gameObject, .25f, claw.clawTopTarget.transform.position, DidFinishAnimatingClawToTarget);
-			}
-			else if(Input.GetMouseButtonDown(1) && claw.isReady) {
-				claw.isReady = false;
-				TweenHelper.defaultTweenHelper.TweenMove(claw.gameObject, .25f, claw.clawBottomTarget.transform.position, DidFinishAnimatingClawToTarget);
-			}
-			#endif
-
-			if(activeImageTarget != null) {
-				UI_Manager.defaultUI_Manager.SetARWarningPanelVisible(false);
-			}
-			else {
-				UI_Manager.defaultUI_Manager.SetARWarningPanelVisible(true);
-			}
-		}
-
-		if(this.hasPlayer && activeImageTarget != null){
-
-			if(Time.time - lastWebUpdateTime > 1){
+		if(isGameplayEnabled) {
+			if(orientationImageIndex >= 0 && Time.time - lastWebUpdateTime > 1){
 				//Debug.Log("web update time diff: " + (Time.time - lastWebUpdateTime));
 				lastWebUpdateTime = Time.time;
 
-				//get index of selected target image
-				int orientationImageIndex = (activeImageTarget != null) ? activeImageTarget.index - 1 : -1;
-
-				
-
-				StartCoroutine(webRequestManager.SendPlayerUpdate(orientationImageIndex, this.playerID, this.score, this.currentRoundID));
+				//Web call
+				StartCoroutine(webRequestManager.SendPlayerUpdate(orientationImageIndex, this.playerID, this.playerSubID, this.score, this.currentRoundID));
 			}
 		}
-
 	}
 		
 	public void DidSelectGetNewUser(){
@@ -117,14 +93,18 @@ public class GameManager : MonoBehaviour {
 		StartCoroutine(webRequestManager.GetNewUser());
 	}
 
-	public void DidGetNewUser(int id, string username){
+	public void DidGetNewUser(int id, string username, string subID){
 		this.playerID = id;
 		this.playerUsername = username;
+		this.playerSubID = subID;
+
+		Debug.Log("playerSubID: " + playerSubID);
 
 		Mixpanel.Register("UserID", this.playerID);
 
 		PlayerPrefs.SetInt("playerID", this.playerID);
 		PlayerPrefs.SetString("playerUsername", this.playerUsername);
+		PlayerPrefs.SetString("playerSubID", this.playerSubID);
 
 		//hide new user UI
 		UI_Manager.defaultUI_Manager.HideNewUserPanel();
@@ -147,15 +127,12 @@ public class GameManager : MonoBehaviour {
 				scoreLastRound = score;
 				score = 0;
 			}
-			else if(gameState == GameState.IN_ROUND) {
-
-			}
 
 			Value props = new Value();
 			props["gameState"] = new Value(this.gameState.ToString());
 			Mixpanel.Track("App.DidGetGameUpdate.GameStateChanged", props);
 
-			UI_Manager.defaultUI_Manager.UpdateForGameState(gameState, playerUsername, scoreLastRound);
+			UpdateUIForGameState();
 		}
 
 		this.nextStateStartTime = Time.time + timeRemaining;
@@ -224,19 +201,61 @@ public class GameManager : MonoBehaviour {
 		activeImageTarget = imageTarget;
 		stage.orientationObj = imageTarget.gameObject;
 
+		//get index of selected target image
+		orientationImageIndex = activeImageTarget.index;
+
 		Value props = new Value();
 		props["imageTargetIndex"] = new Value(imageTarget.index.ToString());
 		Mixpanel.Track("App.DidRecognizeImageTarget", props);
+
+		if(isGameplayEnabled) {
+			UpdateUIForGameState();
+		}
 	}
 
 	public void DidLoseImageTarget(TrackableImageTarget imageTarget){
+		bool shouldUpdateUI = (activeImageTarget != null);
+
 		activeImageTarget = null;
 		stage.orientationObj = null;
 
 		Value props = new Value();
 		props["imageTargetIndex"] = new Value(imageTarget.index.ToString());
 		Mixpanel.Track("App.DidLoseImageTarget", props);
+
+		if(shouldUpdateUI) {
+			UpdateUIForGameState();
+		}
 	}
 
-	  
+	public void DidHideInstructionsPanel() {
+		isGameplayEnabled = true;
+		UpdateUIForGameState();
+	}
+
+	public void UpdateUIForGameState() {
+		if(gameState == GameState.UNSPECIFIED) {
+			UI_Manager.defaultUI_Manager.SetARWarningPanelVisible(true);
+		}
+		else if(gameState == GameState.IN_ROUND) {
+			UI_Manager.defaultUI_Manager.SetAfterRoundInfoVisible(false);
+
+			if(activeImageTarget != null) {
+				UI_Manager.defaultUI_Manager.ShowGameplayPanel();
+				UI_Manager.defaultUI_Manager.SetARWarningPanelVisible(false);
+			}
+			else {
+				UI_Manager.defaultUI_Manager.HideGameplayPanel();
+				UI_Manager.defaultUI_Manager.SetARWarningPanelVisible(true);
+			}
+		}
+		else {
+			//in waiting state
+			UI_Manager.defaultUI_Manager.SetARWarningPanelVisible(false);
+			UI_Manager.defaultUI_Manager.HideGameplayPanel();
+			UI_Manager.defaultUI_Manager.SetAfterRoundInfoVisible(true);
+			UI_Manager.defaultUI_Manager.SetUsername(playerUsername);
+			UI_Manager.defaultUI_Manager.UpdateAfterRoundScore(scoreLastRound);
+		}
+	}
 }

@@ -34,14 +34,14 @@ public class Stage : MonoBehaviour {
 
 			this.scaleWithParent = this.transform.localScale.x;
 
-			// SCALE
-			float scaleMultiplier = 0.6f;
-			float scale = this.scaleWithParent * scaleMultiplier; 
-			this.transform.localScale = new Vector3(scale, scale, scale);
+//			// SCALE
+//			float scaleMultiplier = 1f;
+//			float scale = this.scaleWithParent * scaleMultiplier; 
+//			this.transform.localScale = new Vector3(scale, scale, scale);
 
 			//POSITION
 			//this.transform.localPosition = Vector3.zero;
-			float zPositionOffset = -1.3f;
+			float zPositionOffset = 0f;
 			this.transform.localPosition = new Vector3(0, 0, zPositionOffset);
 
 			//ROTATION

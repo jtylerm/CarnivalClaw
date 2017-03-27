@@ -8,4 +8,5 @@ public class GuestUserResponse : System.Object {
 
 	public int id;
 	public string username;
+	public string subID;
 }
