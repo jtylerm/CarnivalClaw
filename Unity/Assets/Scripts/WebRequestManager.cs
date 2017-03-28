@@ -72,7 +72,8 @@ public class WebRequestManager : System.Object {
 
 			PlayerUpdateResponse response = JsonUtility.FromJson<PlayerUpdateResponse>(web.text);
 		
-			GameManager.defaultGameManager.DidGetGameUpdate(response.gameState, response.nextGameState, response.timeRemaining, response.currentRoundID);
+			GameManager.defaultGameManager.DidGetGameUpdate(response.gameState, response.nextGameState, 
+				response.timeRemaining, response.currentRoundID, response.stageScale, response.stagePositionZOffset);
 		}
 	}
 }

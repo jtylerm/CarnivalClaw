@@ -114,14 +114,16 @@ public class GameManager : MonoBehaviour {
 		Mixpanel.Track("App.DidGetNewUser");
 	}
 
-	public void DidGetGameUpdate(GameState gameState, GameState nextGameState, int timeRemaining, string currentRoundID){
+	public void DidGetGameUpdate(GameState gameState, GameState nextGameState, int timeRemaining, string currentRoundID, float stageScale, float stagePositionZOffset){
 
 		if(this.gameState != gameState 
-			|| this.currentRoundID != currentRoundID){
+			|| this.currentRoundID != currentRoundID) {
 
 			this.gameState = gameState;
 			this.nextGameState = nextGameState;
 			this.currentRoundID = currentRoundID;
+
+			stage.setScalePositionOverrides(stageScale, stagePositionZOffset);
 
 			if(gameState == GameState.WAITING_NEXT_ROUND) {
 				scoreLastRound = score;

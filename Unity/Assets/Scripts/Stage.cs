@@ -13,6 +13,8 @@ public class Stage : MonoBehaviour {
 
 	private float scaleWithParent = 1;
 
+	private float scaleMultiplier = 1;
+	private float positionZOffset = 0;
 
 	void Awake() {
 
@@ -34,18 +36,7 @@ public class Stage : MonoBehaviour {
 
 			this.scaleWithParent = this.transform.localScale.x;
 
-//			// SCALE
-//			float scaleMultiplier = 1f;
-//			float scale = this.scaleWithParent * scaleMultiplier; 
-//			this.transform.localScale = new Vector3(scale, scale, scale);
-
-			//POSITION
-			//this.transform.localPosition = Vector3.zero;
-			float zPositionOffset = 0f;
-			this.transform.localPosition = new Vector3(0, 0, zPositionOffset);
-
-			//ROTATION
-			this.transform.localRotation = Quaternion.identity;
+			UpdateTransform();
 		}
 
 		if(this.orientationObj != null){
@@ -153,6 +144,25 @@ public class Stage : MonoBehaviour {
 		//this.transform.rotation *= Quaternion.Euler(Vector3.right * -90);
 		*/
 
+	}
+
+	void UpdateTransform(){
+		// SCALE 
+		float scale = this.scaleWithParent * this.scaleMultiplier; 
+		this.transform.localScale = new Vector3(scale, scale, scale);
+
+		//POSITION
+		this.transform.localPosition = new Vector3(0, 0, this.positionZOffset);
+
+		//ROTATION
+		this.transform.localRotation = Quaternion.identity;
+	}
+
+	public void setScalePositionOverrides(float scaleMultiplier, float positionZOffset){
+		this.scaleMultiplier = scaleMultiplier;
+		this.positionZOffset = positionZOffset;
+
+		UpdateTransform();
 	}
 
 	float NormalizeAngle(float angle) {

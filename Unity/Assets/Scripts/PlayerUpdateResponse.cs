@@ -10,4 +10,6 @@ public class PlayerUpdateResponse : System.Object {
 	public GameState nextGameState;
 	public int timeRemaining;
 	public string currentRoundID;
+	public float stageScale;
+	public float stagePositionZOffset;
 }
