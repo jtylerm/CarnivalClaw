@@ -69,9 +69,6 @@ public class UI_Manager : MonoBehaviour {
 
 	public void HideNewUserPanel(){
 		newUserPanel.SetActive(false);
-
-		//tell user to aim camera at orientation image
-		this.ShowInstructionsPanel();
 	}
 
 	public void ShowInstructionsPanel(){

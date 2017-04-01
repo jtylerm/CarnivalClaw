@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour {
 	float lastWebUpdateTime = 0;
 
 	void Awake() {
-		PlayerPrefs.DeleteAll();
+		//PlayerPrefs.DeleteAll();
 
 		defaultGameManager = this;
 
@@ -66,6 +66,9 @@ public class GameManager : MonoBehaviour {
 			Mixpanel.Track("App.DidLoadExistingUser");
 
 			this.hasPlayer = true;
+
+			//tell user to aim camera at orientation image
+			UI_Manager.defaultUI_Manager.ShowInstructionsPanel();
 		}
 		else {
 			//no local player data
@@ -108,6 +111,8 @@ public class GameManager : MonoBehaviour {
 
 		//hide new user UI
 		UI_Manager.defaultUI_Manager.HideNewUserPanel();
+		//tell user to aim camera at orientation image
+		UI_Manager.defaultUI_Manager.ShowInstructionsPanel();
 
 		this.hasPlayer = true;
 
@@ -258,6 +263,7 @@ public class GameManager : MonoBehaviour {
 			UI_Manager.defaultUI_Manager.SetAfterRoundInfoVisible(true);
 			UI_Manager.defaultUI_Manager.SetUsername(playerUsername);
 			UI_Manager.defaultUI_Manager.UpdateAfterRoundScore(scoreLastRound);
+			UI_Manager.defaultUI_Manager.UpdateGameplayScore(score);
 		}
 	}
 }
