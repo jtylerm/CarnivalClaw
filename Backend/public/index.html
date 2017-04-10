@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script>
+//		$(document).ready(function(){
+//
+//
+//		    updateDashboardInfo();
+//		});
+//
+//		function updateDashboardInfo() {
+//
+//			//construct URL of endpoint
+//			var adItemsURL = "./api/ad_items";
+//
+//			//call ajax method and supply functions to handle responses
+//   			$.ajax(adItemsURL)
+//			.done(function(response){
+// 				loadAdItems(response.ad_items);
+//		 	})
+//		 	.fail(function(error){
+//		 		$("#statusLabel").html("error loading dashboard data: " + JSON.stringify(error, null, 4));
+//		 	})
+//		 	.always(function(){
+//
+//		 	});
+//
+//		}
+//
+//		function loadAdItems(adItems) {
+//			//remove all existing <li> before adding others
+//			$('#adItemList').empty();
+//
+//			//for each adItem, add an li to the list
+//			adItems.forEach(function(currentAdItem, index, arr) {
+//				var newID = "ad_item_" + currentAdItem.ID;
+//				var newLi = $( "<li></li>" );
+//				$(newLi).attr('id', newID);
+//				$(newLi).text(currentAdItem.Title);
+//				$(newLi).click(function(){
+//			    	window.location = "/adItem.html?ad_item_id=" + currentAdItem.ID;
+//			    });
+//				$('#adItemList').append(newLi);
+//			});
+//		}
+
+
+	</script>
+</head>
+<body>
+	<div id="pageWrapper">
+		<label id="statusLabel" >No yet loaded</label>
+		<ul id="adItemList"></ul>
+	</div>
+</body>
+</html>

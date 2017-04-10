@@ -8,92 +8,26 @@
     <link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css'>
     <link type="text/css" rel="stylesheet" href="Code/CSS/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="Code/Scripts/endpoints.js"></script>
-    <script src="Code/Scripts/gameManager.js"></script>
-    <script>
-
-    </script>
 </head>
 <body>
-
-    <div id="pageHolder">
-
-        <div id="gameContent">
-            <div id="logoContainer">
-                <img id="logoImg" src="https://s3.amazonaws.com/tylermayberry/carnivalclaw/logo.png" />
+    <div id="pageWrapper">
+        <div id="header">
+            <img id="logoImg" src="Images/logo.png" />
+        </div>
+        <div id="downloadsSection">
+            <div id="appleDownloadsContainer">
+                <img class="inlineBlockItems deviceLogo" src="Images/appleLogo.png" />
+                <p class="inlineBlockItems">Click Here To Download App For Apple Devices</p>
             </div>
-            <div id="orientationImageContainer">
-                <img id="orientationImage" src="" />
-            </div>
-            <div id="gameContentBottom">
-                <p id="timerText">Current Round Time Remaining <span id="timerValue">:25</span></p>
-                <p id="downloadText">Download The App On iTunes & GooglePlay
-                <br/>Then Aim Your Device's Camera At The Orientation Image Above</p>
-                <div id="codeArtLogoContainer">
-                    <img id="codeArtLogo" src="https://s3.amazonaws.com/tylermayberry/carnivalclaw/codeArtLogo.jpg" />
-                </div>
+            <div id="bar"></div>
+            <div id="androidDownloadsContainer">
+                <img class="inlineBlockItems deviceLogo" src="Images/androidLogo.png" />
+                <p class="inlineBlockItems">Click Here To Download App For Android Devices</p>
             </div>
         </div>
-
-        <div id="infoContent">
-
-            <div id="tylerInfo">
-                <div id="tylerInfoText">
-                    <p id="tylerInfoTitle">Tyler Mayberry - Arts Studies Senior</p>
-                    <p id="tylerInfoContent">Carnival Claw is an augmented reality video game where users are meant to tap corresponding buttons
-                        to grab items from the top or bottom rows with the claw. Grab all the Rupees and Bags while avoiding the Bombs for your best score! I made all art with
-                        Adobe Illustrator and Blender, I coded and created the app with Unity, and I wrote the website for the game.
-                        <br/><br/>Carnival Claw is my submission for the 2017 Code + Art Visualization Contest.</p>
-                </div>
-                <div id="tylerImgContainer">
-                    <div id="tylerImg"></div>
-                </div>
-            </div>
-
-            <div id="videoInfo">
-                <div id="tutorialVideoContent">
-                    <div id="tutorialVideoHeader">
-                        <p><span class="underlined">Tutorial</span></p>
-                    </div>
-                    <div id="tutorialVideoContainer">
-                        <video id="tutorialVideo" src="https://s3.amazonaws.com/tylermayberry/carnivalclaw/tutorial.mp4" autoplay loop></video>
-                    </div>
-                </div>
-                <div id="tipsVideoContent">
-                    <div id="tipsVideoHeader">
-                        <p><span class="underlined">Tips</span></p>
-                    </div>
-                    <div id="tipsVideoContainer">
-                        <video id="tipsVideo" src="https://s3.amazonaws.com/tylermayberry/carnivalclaw/tips.mp4" autoplay loop></video>
-                    </div>
-                </div>
-            </div>
-
-            <div id="leaderboardInfo">
-                <div id="leaderboardContainer">
-                    <img id="leaderboard" src="Images/dummyLeaderboard.png" />
-
-                    <!--<table id="leaderboard">-->
-                        <!--<tr>-->
-                            <!--<th>Top High Scores</th>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>-->
-                                <!--<table>-->
-                                    <!--<tr>-->
-                                        <!---->
-                                    <!--</tr>-->
-                                    <!--<tr>-->
-
-                                    <!--</tr>-->
-                                <!--</table>-->
-                            <!--</td>-->
-                        <!--</tr>-->
-                    <!--</table>-->
-                </div>
-            </div>
+        <div id="footer">
+            <a class="underlined" id="supportLink" href="https://s3.amazonaws.com/tylermayberry/carnivalclaw/site/support.html">Support Page</a>
         </div>
     </div>
-
 </body>
 </html>

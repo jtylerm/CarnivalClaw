@@ -1,420 +1,103 @@
 //Variables
 $color1: blueviolet;
 $color2: #DDFFF7;
+$color3: #e22bdf;
+$color4: #2be22e;
+$color5: #00bbcc;
 $fontFredoka: 'Fredoka One', cursive;
 $fontAcme: 'Acme', sans-serif;
 
-//Immersion Theater Styling
-
 //Elements
 html {
-  width: 6816px;
-  height: 2240px;
+  height: 100vh;
 }
-
 body {
-  background: $color1;
-  width: 100%;
   height: 100%;
-  margin: 0;
+  font-family: $fontAcme;
+  color: $color2;
 }
 
 //Classes
+.inlineBlockItems{
+  display: inline-block;
+}
+
+.deviceLogo {
+  width: 10%;
+}
+
 .underlined {
-  border-bottom: 10px solid $color2;
+  border-bottom: 3px solid $color2;
 }
 
 //IDs
-#pageHolder {
-  width: 100%;
-  height: 100%;
+
+//Header
+#header {
+  height: 25%;
+  background: $color5;
+  text-align: center;
 }
 
-//GameContent Section
-#gameContent {
-  float: left;
-  vertical-align: top;
-  width: 3408px;
-  height: 2240px;
-  display: inline-block;
-  background-image: url(https://s3.amazonaws.com/tylermayberry/carnivalclaw/gameContentBG_Immersion.png);
+#logoImg {
+  width: 25%;
+  padding-bottom: 20px;
 }
 
-#gameContentBottom {
-  height: 600px;
+//Downloads
+#downloadsSection {
+  background: $color4;
+  text-align: center;
   margin: auto;
+  height: *vh;
+
+  p {
+    font-size: 20px;
+  }
+}
+
+#appleDownloadsContainer {
+  padding: 20px 0;
+}
+
+#bar {
+  height: 10px;
+  background: #1ac01d;
+}
+
+#androidDownloadsContainer {
+  padding: 20px 0;
+}
+
+#footer {
+  height: 25%;
+  background: $color1;
   text-align: center;
-  padding-top: 100px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
 }
 
-#logoContainer {
-  text-align: center;
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
-
-#orientationImageContainer {
-  margin: auto;
-  text-align: center;
-}
-
-#orientationImage {
-  padding-top: 20px;
-}
-
-#timerText {
-  width: 1700px;
-  font-family: $fontFredoka;
-  font-size: 80px;
-  color: $color2;
-  padding-top: 30px;
-  padding-bottom: 10px;
-  margin: auto;
-}
-
-#downloadText {
-  width: 1700px;
-  font-family: $fontAcme;
-  font-size: 60px;
-  color: $color2;
-  margin: auto;
-}
-
-#codeArtLogoContainer{
-  text-align: center;
-  padding-top: 100px;
-}
-
-#codeArtLogo {
-  width: 450px;
-  height: 115px;
-}
-
-//InfoContent Section
-#infoContent {
-  float: right;
-  vertical-align: top;
-  position: relative;
-  width: 3408px;
-  height: 2240px;
-  display: inline-block;
-}
-
-//TylerInfo Section
-#tylerInfo {
-  height: 740px;
-  padding-top: 100px;
-  padding-right: 500px;
-  text-align: right;
-}
-
-#tylerInfoText {
-  float: left;
-  margin-left: 600px;
-  width: 1600px;
-  height: 100%;
-  font-family: $fontAcme;
-  color: $color2;
-}
-
-#tylerInfoTitle {
-  width: 100%;
-  font-size: 60px;
-  font-family: $fontFredoka;
-}
-
-#tylerInfoContent {
-  width: 100%;
-  font-size: 45px;
-  word-wrap: break-word;
-}
-
-#tylerImgContainer {
-  float: right;
-  height: 100%;
-}
-
-#tylerImg {
-  border: 20px solid $color2;
-  border-radius: 15px;
-  width: 500px;
-  height: 500px;
-  background-image: url(https://s3.amazonaws.com/tylermayberry/carnivalclaw/tyler_Immersion.png);
-}
-
-//VideoInfo Section
-#videoInfo {
-  height: 740px;
-  padding-top: 40px;
-  background: rebeccapurple;
-}
-
-//Tutorial Video Section
-#tutorialVideoContent {
-  float: left;
-  width: 1704px;
-  height: 100%;
-  text-align: center;
-}
-
-#tutorialVideoHeader {
-  font-size: 60px;
-  font-weight: bold;
+#supportLink {
   font-family: $fontFredoka;
   color: $color2;
-  padding-bottom: 50px;
-}
-
-#tutorialVideoContainer {
+  text-decoration: none;
   margin: auto;
 }
 
-#tutorialVideo {
-  border: 20px solid $color2;
-  border-radius: 15px;
-}
+///////////////////////
+/////// MOBILE ////////
+///////////////////////
 
-//Tips Video Section
-#tipsVideoContent{
-  float: right;
-  width: 1704px;
-  height: 100%;
-  text-align: center;
-}
-
-#tipsVideoHeader {
-  font-size: 60px;
-  font-weight: bold;
-  font-family: $fontFredoka;
-  color: $color2;
-  padding-bottom: 50px;
-}
-
-#tipsVideoContainer {
-  margin: auto;
-}
-
-#tipsVideo {
-  border: 20px solid $color2;
-  border-radius: 15px;
-}
-
-//Leaderboard Section
-#leaderboardInfo {
-  height: 740px;
-  padding-top: 30px;
-}
-
-#leaderboardContainer {
-  text-align: center;
-  margin: auto;
-}
-
-#leaderboard {
-  width: 2000px;
-  height: 650px;
-  border: 20px solid $color2;
-  border-radius: 15px;
-}
-
-//Game Lab Styling
-@media only screen and (max-height: 1720px) {
-
-  //Elements
-  html{
-    width: 7337px;
-    height: 1720px;
+@media only screen and (max-width: 440px) {
+  #downloadsSection {
+    p {
+      font-size: 12px;
+    }
   }
 
-  //IDs
-
-  #logoContainer {
-    text-align: center;
-    margin: 0;
-    margin-top: 50px;
-    margin-bottom: 50px;
-  }
-
-  #logoImg{
-    width: 393px;
-    height: 250px;
-  }
-
-  #gameContent {
-    width: 3668px;
-    height: 100%;
-    vertical-align: top;
-    display: inline-block;
-    background-image: url(https://s3.amazonaws.com/tylermayberry/carnivalclaw/gameContentBG_GameLab.png);
-  }
-
-  #orientationImage {
-    width: 768px;
-    height: 768px;
-    padding: 0;
-  }
-
-  #timerText {
-    width: 1700px;
-    font-family: $fontFredoka;
-    font-size: 70px;
-    color: $color2;
-    margin: auto;
-  }
-
-  #downloadText {
-    width: 1700px;
-    font-family: $fontAcme;
-    font-size: 50px;
-    color: $color2;
-    margin: auto;
-  }
-
-  #gameContentBottom {
-    height: 600px;
-    margin: auto;
-    text-align: center;
-    padding: 0;
-    padding-top: 50px;
-  }
-
-  #codeArtLogoContainer{
-    text-align: center;
-    padding-top: 100px;
-  }
-
-  #codeArtLogo {
-    width: 450px;
-    height: 115px;
-  }
-
-  //InfoContent Section
-  #infoContent {
-    width: 3668px;
-    height: 100%;
-    vertical-align: top;
-    position: relative;
-    display: inline-block;
-  }
-
-  //TylerInfo Section
-  #tylerInfo {
-    height: 573px;
-    padding-top: 85px;
-    padding-right: 585px;
-    text-align: right;
-  }
-
-  #tylerInfoText {
-    float: left;
-    margin-left: 600px;
-    width: 1600px;
-    height: 100%;
-    font-family: $fontAcme;
-    color: $color2;
-  }
-
-  #tylerInfoTitle {
-    width: 100%;
-    font-size: 50px;
-    font-family: $fontFredoka;
-  }
-
-  #tylerInfoContent {
-    width: 100%;
-    font-size: 35px;
-    word-wrap: break-word;
-  }
-
-  #tylerImgContainer {
-    float: right;
-    height: 100%;
-  }
-
-  #tylerImg {
-    border: 20px solid $color2;
-    border-radius: 15px;
-    width: 400px;
-    height: 400px;
-    background-image: url(https://s3.amazonaws.com/tylermayberry/carnivalclaw/tyler_GameLab.png);
-  }
-
-  //VideoInfo Section
-  #videoInfo {
-    height: 573px;
-    padding-top: 40px;
-    background: rebeccapurple;
-  }
-
-  //Tutorial Video Section
-  #tutorialVideoContent {
-    float: left;
-    width: 1704px;
-    height: 100%;
-    text-align: center;
-  }
-
-  #tutorialVideoHeader {
-    font-size: 50px;
-    font-weight: bold;
-    font-family: $fontFredoka;
-    color: $color2;
-    padding-bottom: 30px;
-  }
-
-  #tutorialVideoContainer {
-    margin: auto;
-  }
-
-  #tutorialVideo {
-    border: 20px solid $color2;
-    border-radius: 15px;
-    width: 538px;
-    height: 390px;
-  }
-
-  //Tips Video Section
-  #tipsVideoContent{
-    float: right;
-    width: 1704px;
-    height: 100%;
-    text-align: center;
-  }
-
-  #tipsVideoHeader {
-    font-size: 50px;
-    font-weight: bold;
-    font-family: $fontFredoka;
-    color: $color2;
-    padding-bottom: 30px;
-  }
-
-  #tipsVideoContainer {
-    margin: auto;
-  }
-
-  #tipsVideo {
-    border: 20px solid $color2;
-    border-radius: 15px;
-    width: 538px;
-    height: 390px;
-  }
-
-  //Leaderboard Info Section
-  #leaderboardInfo {
-    height: 573px;
-    padding-top: 30px;
-  }
-
-  #leaderboardContainer {
-    text-align: center;
-    margin: auto;
-  }
-
-  #leaderboard {
-    width: 1358px;
-    height: 500px;
-    border: 20px solid $color2;
-    border-radius: 15px;
+  #bar {
+    height: 5px;
   }
 }

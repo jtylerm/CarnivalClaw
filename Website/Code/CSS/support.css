@@ -1,0 +1,25 @@
+body {
+  background: blueviolet;
+  color: mintcream; }
+
+.underlined {
+  border-bottom: 5px solid mintcream; }
+
+#wrapper {
+  text-align: center; }
+  #wrapper a {
+    color: mintcream; }
+
+#header {
+  font-family: "Fredoka One", cursive;
+  font-size: 60px; }
+
+#text1 {
+  font-family: "Acme", sans-serif;
+  font-size: 45px; }
+
+#text2 {
+  font-family: "Acme", sans-serif;
+  font-size: 45px; }
+
+/*# sourceMappingURL=support.css.map */

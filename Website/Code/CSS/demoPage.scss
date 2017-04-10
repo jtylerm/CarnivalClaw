@@ -126,7 +126,6 @@ body {
 #demoImagesInfoContainer {
   color: $color5;
   background: $color1;
-  //height: 700px;
   text-align: center;
 
   p {
@@ -146,10 +145,12 @@ body {
 
 #demoImageContainer1 {
   float: left;
-  width: 800px;
+  padding: 10px;
+  padding-bottom: 0;
 }
 
 #demoImageContainer2 {
   float: right;
-  width: 800px;
+  padding: 10px;
+  padding-bottom: 0;
 }

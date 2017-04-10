@@ -1,331 +1,67 @@
 html {
-  width: 6816px;
-  height: 2240px; }
+  height: 100vh; }
 
 body {
-  background: blueviolet;
-  width: 100%;
-  height: 100%;
-  margin: 0; }
-
-.underlined {
-  border-bottom: 10px solid #DDFFF7; }
-
-#pageHolder {
-  width: 100%;
-  height: 100%; }
-
-#gameContent {
-  float: left;
-  vertical-align: top;
-  width: 3408px;
-  height: 2240px;
-  display: inline-block;
-  background-image: url(https://s3.amazonaws.com/tylermayberry/carnivalclaw/gameContentBG_Immersion.png); }
-
-#gameContentBottom {
-  height: 600px;
-  margin: auto;
-  text-align: center;
-  padding-top: 100px; }
-
-#logoContainer {
-  text-align: center;
-  margin-top: 50px;
-  margin-bottom: 50px; }
-
-#orientationImageContainer {
-  margin: auto;
-  text-align: center; }
-
-#orientationImage {
-  padding-top: 20px; }
-
-#timerText {
-  width: 1700px;
-  font-family: "Fredoka One", cursive;
-  font-size: 80px;
-  color: #DDFFF7;
-  padding-top: 30px;
-  padding-bottom: 10px;
-  margin: auto; }
-
-#downloadText {
-  width: 1700px;
-  font-family: "Acme", sans-serif;
-  font-size: 60px;
-  color: #DDFFF7;
-  margin: auto; }
-
-#codeArtLogoContainer {
-  text-align: center;
-  padding-top: 100px; }
-
-#codeArtLogo {
-  width: 450px;
-  height: 115px; }
-
-#infoContent {
-  float: right;
-  vertical-align: top;
-  position: relative;
-  width: 3408px;
-  height: 2240px;
-  display: inline-block; }
-
-#tylerInfo {
-  height: 740px;
-  padding-top: 100px;
-  padding-right: 500px;
-  text-align: right; }
-
-#tylerInfoText {
-  float: left;
-  margin-left: 600px;
-  width: 1600px;
   height: 100%;
   font-family: "Acme", sans-serif;
   color: #DDFFF7; }
 
-#tylerInfoTitle {
-  width: 100%;
-  font-size: 60px;
-  font-family: "Fredoka One", cursive; }
+.inlineBlockItems {
+  display: inline-block; }
 
-#tylerInfoContent {
-  width: 100%;
-  font-size: 45px;
-  word-wrap: break-word; }
+.deviceLogo {
+  width: 10%; }
 
-#tylerImgContainer {
-  float: right;
-  height: 100%; }
+.underlined {
+  border-bottom: 3px solid #DDFFF7; }
 
-#tylerImg {
-  border: 20px solid #DDFFF7;
-  border-radius: 15px;
-  width: 500px;
-  height: 500px;
-  background-image: url(https://s3.amazonaws.com/tylermayberry/carnivalclaw/tyler_Immersion.png); }
-
-#videoInfo {
-  height: 740px;
-  padding-top: 40px;
-  background: rebeccapurple; }
-
-#tutorialVideoContent {
-  float: left;
-  width: 1704px;
-  height: 100%;
+#header {
+  height: 25%;
+  background: #00bbcc;
   text-align: center; }
 
-#tutorialVideoHeader {
-  font-size: 60px;
-  font-weight: bold;
-  font-family: "Fredoka One", cursive;
-  color: #DDFFF7;
-  padding-bottom: 50px; }
+#logoImg {
+  width: 25%;
+  padding-bottom: 20px; }
 
-#tutorialVideoContainer {
-  margin: auto; }
-
-#tutorialVideo {
-  border: 20px solid #DDFFF7;
-  border-radius: 15px; }
-
-#tipsVideoContent {
-  float: right;
-  width: 1704px;
-  height: 100%;
-  text-align: center; }
-
-#tipsVideoHeader {
-  font-size: 60px;
-  font-weight: bold;
-  font-family: "Fredoka One", cursive;
-  color: #DDFFF7;
-  padding-bottom: 50px; }
-
-#tipsVideoContainer {
-  margin: auto; }
-
-#tipsVideo {
-  border: 20px solid #DDFFF7;
-  border-radius: 15px; }
-
-#leaderboardInfo {
-  height: 740px;
-  padding-top: 30px; }
-
-#leaderboardContainer {
+#downloadsSection {
+  background: #2be22e;
   text-align: center;
+  margin: auto;
+  height: 100%; }
+  #downloadsSection p {
+    font-size: 20px; }
+
+#appleDownloadsContainer {
+  padding: 20px 0; }
+
+#bar {
+  height: 10px;
+  background: #1ac01d; }
+
+#androidDownloadsContainer {
+  padding: 20px 0; }
+
+#footer {
+  height: 25%;
+  background: blueviolet;
+  text-align: center;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed; }
+
+#supportLink {
+  font-family: "Fredoka One", cursive;
+  color: #DDFFF7;
+  text-decoration: none;
   margin: auto; }
 
-#leaderboard {
-  width: 2000px;
-  height: 650px;
-  border: 20px solid #DDFFF7;
-  border-radius: 15px; }
+@media only screen and (max-width: 440px) {
+  #downloadsSection p {
+    font-size: 12px; }
 
-@media only screen and (max-height: 1720px) {
-  html {
-    width: 7337px;
-    height: 1720px; }
-
-  #logoContainer {
-    text-align: center;
-    margin: 0;
-    margin-top: 50px;
-    margin-bottom: 50px; }
-
-  #logoImg {
-    width: 393px;
-    height: 250px; }
-
-  #gameContent {
-    width: 3668px;
-    height: 100%;
-    vertical-align: top;
-    display: inline-block;
-    background-image: url(https://s3.amazonaws.com/tylermayberry/carnivalclaw/gameContentBG_GameLab.png); }
-
-  #orientationImage {
-    width: 768px;
-    height: 768px;
-    padding: 0; }
-
-  #timerText {
-    width: 1700px;
-    font-family: "Fredoka One", cursive;
-    font-size: 70px;
-    color: #DDFFF7;
-    margin: auto; }
-
-  #downloadText {
-    width: 1700px;
-    font-family: "Acme", sans-serif;
-    font-size: 50px;
-    color: #DDFFF7;
-    margin: auto; }
-
-  #gameContentBottom {
-    height: 600px;
-    margin: auto;
-    text-align: center;
-    padding: 0;
-    padding-top: 50px; }
-
-  #codeArtLogoContainer {
-    text-align: center;
-    padding-top: 100px; }
-
-  #codeArtLogo {
-    width: 450px;
-    height: 115px; }
-
-  #infoContent {
-    width: 3668px;
-    height: 100%;
-    vertical-align: top;
-    position: relative;
-    display: inline-block; }
-
-  #tylerInfo {
-    height: 573px;
-    padding-top: 85px;
-    padding-right: 585px;
-    text-align: right; }
-
-  #tylerInfoText {
-    float: left;
-    margin-left: 600px;
-    width: 1600px;
-    height: 100%;
-    font-family: "Acme", sans-serif;
-    color: #DDFFF7; }
-
-  #tylerInfoTitle {
-    width: 100%;
-    font-size: 50px;
-    font-family: "Fredoka One", cursive; }
-
-  #tylerInfoContent {
-    width: 100%;
-    font-size: 35px;
-    word-wrap: break-word; }
-
-  #tylerImgContainer {
-    float: right;
-    height: 100%; }
-
-  #tylerImg {
-    border: 20px solid #DDFFF7;
-    border-radius: 15px;
-    width: 400px;
-    height: 400px;
-    background-image: url(https://s3.amazonaws.com/tylermayberry/carnivalclaw/tyler_GameLab.png); }
-
-  #videoInfo {
-    height: 573px;
-    padding-top: 40px;
-    background: rebeccapurple; }
-
-  #tutorialVideoContent {
-    float: left;
-    width: 1704px;
-    height: 100%;
-    text-align: center; }
-
-  #tutorialVideoHeader {
-    font-size: 50px;
-    font-weight: bold;
-    font-family: "Fredoka One", cursive;
-    color: #DDFFF7;
-    padding-bottom: 30px; }
-
-  #tutorialVideoContainer {
-    margin: auto; }
-
-  #tutorialVideo {
-    border: 20px solid #DDFFF7;
-    border-radius: 15px;
-    width: 538px;
-    height: 390px; }
-
-  #tipsVideoContent {
-    float: right;
-    width: 1704px;
-    height: 100%;
-    text-align: center; }
-
-  #tipsVideoHeader {
-    font-size: 50px;
-    font-weight: bold;
-    font-family: "Fredoka One", cursive;
-    color: #DDFFF7;
-    padding-bottom: 30px; }
-
-  #tipsVideoContainer {
-    margin: auto; }
-
-  #tipsVideo {
-    border: 20px solid #DDFFF7;
-    border-radius: 15px;
-    width: 538px;
-    height: 390px; }
-
-  #leaderboardInfo {
-    height: 573px;
-    padding-top: 30px; }
-
-  #leaderboardContainer {
-    text-align: center;
-    margin: auto; }
-
-  #leaderboard {
-    width: 1358px;
-    height: 500px;
-    border: 20px solid #DDFFF7;
-    border-radius: 15px; } }
+  #bar {
+    height: 5px; } }
 
 /*# sourceMappingURL=main.css.map */

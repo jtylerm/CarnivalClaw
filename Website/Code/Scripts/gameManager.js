@@ -11,7 +11,7 @@ var GameState = {
 };
 
 
-var TIME_BETWEEN_ROUNDS = 10 * 1000;
+var TIME_BETWEEN_ROUNDS = 20 * 1000;
 
 var ROUND_DURATION = 45 * 1000;
 
@@ -33,9 +33,14 @@ GameManager.prototype.didGetNewGameRoom = function () {
 };
 
 GameManager.prototype.getNewRoom = function () {
+
+    var url = ENDPOINT_GAMEROOM_NEW + "?";
+    url += "width=" + $(window).width();
+    url += "&height=" + $(window).height();
+
     $.ajax({
         cache: false,
-        url: ENDPOINT_GAMEROOM_NEW
+        url: url
     }).done(function (data) {
         gameManager.gameRoom = data.gameRoom;
         gameManager.didGetNewGameRoom();
@@ -59,7 +64,7 @@ GameManager.prototype.sendRoomUpdate = function () {
         "round_id":this.roundID
     };
 
-    console.log("sendRoomUpdate " + JSON.stringify(dataObj));
+    //console.log("sendRoomUpdate " + JSON.stringify(dataObj));
 
     $.ajax({
         cache: false,
@@ -67,6 +72,8 @@ GameManager.prototype.sendRoomUpdate = function () {
         data: dataObj
     }).done(function (data) {
         gameManager.gameRoom = data.gameRoom;
+        console.log("gameRoom " + JSON.stringify(gameManager.gameRoom));
+        gameManager.showCurrentScores();
         //didUpdateGameRoom();
     }).fail(function (error) {
         console.log("ajax fail: " + error);
@@ -82,7 +89,7 @@ GameManager.prototype.startMainTimer = function() {
 };
 
 GameManager.prototype.mainTimerFired = function () {
-    console.log('main timer fired');
+    //console.log('main timer fired');
 
     if(gameManager.gameState == GameState.UNSPECIFIED) {
         gameManager.transitionToWaiting();
@@ -102,8 +109,15 @@ GameManager.prototype.mainTimerFired = function () {
     }
 
     console.log(gameManager.timeRemaining);
-
-    $('#timerValue').text(":" + Math.ceil(gameManager.timeRemaining / 1000));
+    var timeRemainingPrefix = null;
+    if(gameManager.gameState == GameState.WAITING_NEXT_ROUND){
+        timeRemainingPrefix = "Time Until Next Round: ";
+    }
+    else if(gameManager.gameState == GameState.IN_ROUND) {
+        timeRemainingPrefix = "Time Remaining In Current Round: ";
+    }
+    $('#timerText').text(timeRemainingPrefix);
+    $('#timerValue').text(Math.ceil(gameManager.timeRemaining / 1000));
 
     gameManager.sendRoomUpdate();
 
@@ -127,6 +141,70 @@ GameManager.prototype.transitionToInRound = function () {
     //TODO: update the UI
 };
 
+GameManager.prototype.showCurrentScores = function(){
+    var PLAYERS_PER_LEADERBOARD = 6;
+    var players = this.gameRoom.players;
+    var isHighScores = false;
+
+    //DEBUG - test with many players
+    // var playerID = 1001;
+    // while (players.length < 9) {
+    //     var player = new Object();
+    //     player.id = playerID++;
+    //     player.previousRoundScore = 3000;
+    //     player.currentRoundScore = 4000;
+    //     players.push(player);
+    // }
+
+    if(players.length == 0) {
+        isHighScores = true;
+    }
+    else {
+        if(this.gameRoom.gameState == GameState.IN_ROUND) {
+            isHighScores = false;
+        }
+        else {
+            if(this.timeRemaining >= 15 * 1000) {
+                isHighScores = false;
+            }
+            else if(this.timeRemaining < 15 * 1000 && this.timeRemaining >= 10 * 1000) {
+                isHighScores = true;
+            }
+            else if(this.timeRemaining < 10 * 1000 && this.timeRemaining >= 5 * 1000) {
+                isHighScores = false;
+            }
+            else if(this.timeRemaining < 5 * 1000){
+                isHighScores = true;
+            }
+        }
+    }
+
+    var playerScores = null;
+    if(isHighScores){
+        playerScores = this.gameRoom.highScores;
+        $("#lblHighScoresTitle").text("High Scores");
+    }
+    else {
+        playerScores = players;
+        $("#lblHighScoresTitle").text("Current Round Scores");
+    }
+
+    var leaderboardDivs = [$("#leaderboard0"), $("#leaderboard1"), $("#leaderboard2")];
+    for(var i = 0; i < leaderboardDivs.length; i++){
+        if(playerScores.length > i*PLAYERS_PER_LEADERBOARD){
+            leaderboardDivs[i].show();
+            var table = leaderboardDivs[i].find("table");
+            var startIndex = i*PLAYERS_PER_LEADERBOARD;
+            var endIndex = Math.min(startIndex + PLAYERS_PER_LEADERBOARD, playerScores.length);
+            var playersForLeaderboard = playerScores.slice(startIndex, endIndex);
+            populateLeaderboardTableWithPlayers(table, playersForLeaderboard, this.gameRoom.gameState, isHighScores);
+        }
+        else {
+            leaderboardDivs[i].hide();
+        }
+    }
+};
+
 var gameManager = new GameManager();
 
 $(document).ready(function() {
@@ -141,4 +219,52 @@ function generateUUID() {
         return (c=='x' ? r : (r&0x3|0x8)).toString(16);
     });
     return uuid;
+}
+
+function populateLeaderboardTableWithPlayers(table, players, gameState, isHighScores){
+    var tbody = table.find("tbody");
+    tbody.empty();
+
+    for(var i = 0; i < players.length; i++){
+        var player = players[i];
+
+        var tableRow = $("<tr></tr>");
+        tbody.append(tableRow);
+
+        var usernameCol = $("<td></td>");
+        tableRow.append(usernameCol);
+        //TODO: show username from server
+        //usernameCol.text("Wolfpacker_" + player.id);
+        usernameCol.text(player.username);
+
+        var scoreCol = $("<td></td>");
+        tableRow.append(scoreCol);
+
+        if(isHighScores) {
+            scoreCol.text(player.score);
+        }
+        else {
+            if(gameState == GameState.WAITING_NEXT_ROUND){
+                scoreCol.text(player.previousRoundScore);
+            }
+            else {
+                scoreCol.text(player.currentRoundScore);
+            }
+        }
+    }
+
+    var extraRowCount = 6 - players.length;
+    for(var i = 0; i < extraRowCount; i++){
+        var dummyRow = $("<tr></tr>");
+        tbody.append(dummyRow);
+
+        var dummyCol = $("<td></td>");
+        dummyRow.append(dummyCol);
+        dummyCol.html("&nbsp;");
+
+        dummyCol = $("<td></td>");
+        dummyRow.append(dummyCol);
+        dummyCol.html("&nbsp;");
+    }
+
 }

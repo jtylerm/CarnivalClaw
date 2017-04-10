@@ -1,0 +1,43 @@
+//Variables
+$color1: blueviolet;
+$color2: #00bbcc;
+$color3: #e22bdf;
+$color4: #e28a2b;
+$color5: mintcream;
+$fontFredoka: 'Fredoka One', cursive;
+$fontAcme: 'Acme', sans-serif;
+
+//Elements
+body {
+  background: $color1;
+  color: $color5;
+}
+
+//Classes
+.underlined {
+  border-bottom: 5px solid $color5;
+}
+
+//IDs
+#wrapper {
+  text-align: center;
+
+  a {
+    color: $color5;
+  }
+}
+
+#header {
+  font-family: $fontFredoka;
+  font-size: 60px;
+}
+
+#text1 {
+  font-family: $fontAcme;
+  font-size: 45px;
+}
+
+#text2 {
+  font-family: $fontAcme;
+  font-size: 45px;
+}

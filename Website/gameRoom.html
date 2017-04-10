@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Carnival Claw</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css'>
+    <link type="text/css" rel="stylesheet" href="Code/CSS/gameRoom.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="Code/Scripts/endpoints.js"></script>
+    <script src="Code/Scripts/gameManager.js"></script>
+    <script>
+
+    </script>
+</head>
+<body>
+
+<div id="pageHolder">
+
+    <div id="gameContent">
+        <div id="logoContainer">
+            <img id="logoImg" src="https://s3.amazonaws.com/tylermayberry/carnivalclaw/logo.png" />
+        </div>
+        <div id="orientationImageContainer">
+            <img id="orientationImage" src="" />
+        </div>
+        <div id="gameContentBottom">
+            <p id="timerTextContainer"><span id="timerText"></span><span id="timerValue"></span></p>
+            <p id="downloadText">Download The App On iTunes & GooglePlay
+                <br/>Then Aim Your Device's Camera At The Orientation Image Above</p>
+            <div id="codeArtLogoContainer">
+                <img id="codeArtLogo" src="https://s3.amazonaws.com/tylermayberry/carnivalclaw/codeArtLogo.jpg" />
+            </div>
+        </div>
+    </div>
+
+    <div id="infoContent">
+
+        <div id="tylerInfo">
+            <div id="tylerInfoText">
+                <p id="tylerInfoTitle">Tyler Mayberry - Arts Studies Senior</p>
+                <p id="tylerInfoContent">Carnival Claw is an augmented reality video game where users are meant to tap corresponding buttons
+                    to grab items from the top or bottom rows with the claw. Grab all the Rupees and Bags while avoiding the Bombs for your best score! I made all art with
+                    Adobe Illustrator and Blender, I coded and created the app with Unity, and I wrote the website for the game.
+                    <br/><br/>Carnival Claw is my submission for the 2017 Code + Art Visualization Contest.</p>
+            </div>
+            <div id="tylerImgContainer">
+                <div id="tylerImg"></div>
+            </div>
+        </div>
+
+        <div id="videoInfo">
+            <div id="tutorialVideoContent">
+                <div id="tutorialVideoHeader">
+                    <p><span class="underlined">Tutorial</span></p>
+                </div>
+                <div id="tutorialVideoContainer">
+                    <video id="tutorialVideo" src="https://s3.amazonaws.com/tylermayberry/carnivalclaw/tutorial.mp4" autoplay loop></video>
+                </div>
+            </div>
+            <div id="tipsVideoContent">
+                <div id="tipsVideoHeader">
+                    <p><span class="underlined">Tips</span></p>
+                </div>
+                <div id="tipsVideoContainer">
+                    <video id="tipsVideo" src="https://s3.amazonaws.com/tylermayberry/carnivalclaw/tips.mp4" autoplay loop></video>
+                </div>
+            </div>
+        </div>
+
+        <div id="leaderboardInfo">
+            <div id="leaderboardContainer">
+                <div id="lblHighScoresTitle">Current Scores</div>
+                <div id="leaderboardTablesContainer">
+                    <!--<img id="leaderboard" src="Images/dummyLeaderboard.png" />-->
+                    <div id="leaderboard0" class="leaderboard">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Score</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    Wolfpacker_001
+                                </td>
+                                <td>
+                                    320
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Wolfpacker_002
+                                </td>
+                                <td>
+                                    350
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Wolfpacker_003
+                                </td>
+                                <td>
+                                    2
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Wolfpacker_2004
+                                </td>
+                                <td>
+                                    12032
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="leaderboard1" class="leaderboard">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Score</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    Wolfpacker_001
+                                </td>
+                                <td>
+                                    320
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Wolfpacker_002
+                                </td>
+                                <td>
+                                    350
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Wolfpacker_003
+                                </td>
+                                <td>
+                                    2
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Wolfpacker_2004
+                                </td>
+                                <td>
+                                    12032
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="leaderboard2" class="leaderboard">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Score</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    Wolfpacker_001
+                                </td>
+                                <td>
+                                    320
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Wolfpacker_002
+                                </td>
+                                <td>
+                                    350
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Wolfpacker_003
+                                </td>
+                                <td>
+                                    2
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Wolfpacker_2004
+                                </td>
+                                <td>
+                                    12032
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
