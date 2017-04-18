@@ -6,7 +6,7 @@ using mixpanel;
 public class WebRequestManager : System.Object {
 
 	//public static string BASE_URL = "http://192.168.1.67:3000";
-	public static string BASE_URL = "http://carnivalclaw.tylermayberry.com/";
+	public static string BASE_URL = "https://services.carnivalclaw.com";
 
 	public static string WEB_API_PATH = BASE_URL + "/api";
 

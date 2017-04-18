@@ -23,6 +23,8 @@ public class UI_Manager : MonoBehaviour {
 
 	public GameObject instructionsPanel;
 
+	public GameObject demoPagePanel;
+
 	public Text usernameText;
 	public Text gameplayScoreText;
 
@@ -102,5 +104,16 @@ public class UI_Manager : MonoBehaviour {
 		if(arWarningPanel.activeSelf != visible) {
 			arWarningPanel.SetActive(visible);
 		}
+	}
+
+	public void SetDemoPagePanel(bool visible) {
+		if(demoPagePanel.activeSelf != visible) {
+			demoPagePanel.SetActive(visible);
+		}
+	}
+
+	public void SendUserToDemoPageSite() {
+		Debug.Log("demo page button clicked");
+		Application.OpenURL("http://www.carnivalclaw.com/demoPage.html");
 	}
 }

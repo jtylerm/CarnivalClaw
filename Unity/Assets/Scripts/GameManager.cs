@@ -67,8 +67,8 @@ public class GameManager : MonoBehaviour {
 
 			this.hasPlayer = true;
 
-			//tell user to aim camera at orientation image
-			UI_Manager.defaultUI_Manager.ShowInstructionsPanel();
+			//show demo page panel
+			UI_Manager.defaultUI_Manager.SetDemoPagePanel(true);
 		}
 		else {
 			//no local player data
@@ -111,8 +111,8 @@ public class GameManager : MonoBehaviour {
 
 		//hide new user UI
 		UI_Manager.defaultUI_Manager.HideNewUserPanel();
-		//tell user to aim camera at orientation image
-		UI_Manager.defaultUI_Manager.ShowInstructionsPanel();
+		//show demo panel UI
+		UI_Manager.defaultUI_Manager.SetDemoPagePanel(true);
 
 		this.hasPlayer = true;
 

@@ -23,14 +23,24 @@ body {
 }
 
 .deviceLogo {
-  width: 10%;
+  height: 40%;
 }
 
 .underlined {
   border-bottom: 3px solid $color2;
 }
 
+.verticalContainer {
+  vertical-align: middle;
+  display: table-cell;
+}
+
 //IDs
+
+#pageWrapper {
+  height: 100%;
+  width: 100%;
+}
 
 //Header
 #header {
@@ -40,50 +50,68 @@ body {
 }
 
 #logoImg {
-  width: 25%;
-  padding-bottom: 20px;
+  height: 75%;
 }
 
 //Downloads
 #downloadsSection {
   background: $color4;
   text-align: center;
-  margin: auto;
-  height: *vh;
+  height: 50%;
+  width: 100%;
+  display: table;
 
   p {
-    font-size: 20px;
+    font-size: 2vh;
   }
 }
 
 #appleDownloadsContainer {
   padding: 20px 0;
+  height: 49%;
+  width: 100%;
+  cursor: pointer;
+  display: table-row;
+  vertical-align: middle;
 }
 
 #bar {
-  height: 10px;
+  height: 2%;
+  width: 100%;
   background: #1ac01d;
+  display: table-row;
+  vertical-align: middle;
 }
 
 #androidDownloadsContainer {
   padding: 20px 0;
+  height: 49%;
+  width: 100%;
+  cursor: pointer;
+  display: table-row;
+  vertical-align: middle;
 }
 
 #footer {
   height: 25%;
   background: $color1;
   text-align: center;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  position: fixed;
+}
+
+#supportText {
+  padding-top: 40px;
+  color: $color2;
+  font-size: 2vh;
 }
 
 #supportLink {
-  font-family: $fontFredoka;
   color: $color2;
   text-decoration: none;
-  margin: auto;
+  cursor: pointer;
+}
+
+#copyrightInfo {
+  font-size: 2vh;
 }
 
 ///////////////////////
@@ -93,7 +121,7 @@ body {
 @media only screen and (max-width: 440px) {
   #downloadsSection {
     p {
-      font-size: 12px;
+      font-size: 12pt;
     }
   }
 

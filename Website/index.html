@@ -8,6 +8,17 @@
     <link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css'>
     <link type="text/css" rel="stylesheet" href="Code/CSS/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function() {
+            $( "#appleDownloadsContainer" ).click(function() {
+                window.location = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1219799408&mt=8";
+            });
+
+            $( "#androidDownloadsContainer" ).click(function() {
+                window.location = "https://play.google.com/store/apps/details?id=com.tylermayberry.CarnivalClaw";
+            });
+        });
+    </script>
 </head>
 <body>
     <div id="pageWrapper">
@@ -16,17 +27,24 @@
         </div>
         <div id="downloadsSection">
             <div id="appleDownloadsContainer">
-                <img class="inlineBlockItems deviceLogo" src="Images/appleLogo.png" />
-                <p class="inlineBlockItems">Click Here To Download App For Apple Devices</p>
+                <div class="verticalContainer">
+                    <img id="appleLogo" class="inlineBlockItems deviceLogo" src="Images/appleLogo.png" />
+                    <p id="appleText" class="inlineBlockItems">Click Here To Download App For Apple Devices</p>
+                </div>
             </div>
-            <div id="bar"></div>
+            <div id="bar">
+                <div class="verticalContainer"></div>
+            </div>
             <div id="androidDownloadsContainer">
-                <img class="inlineBlockItems deviceLogo" src="Images/androidLogo.png" />
-                <p class="inlineBlockItems">Click Here To Download App For Android Devices</p>
+                <div class="verticalContainer">
+                    <img id="androidLogo" class="inlineBlockItems deviceLogo" src="Images/androidLogo.png" />
+                    <p id="androidText" class="inlineBlockItems">Click Here To Download App For Android Devices</p>
+                </div>
             </div>
         </div>
         <div id="footer">
-            <a class="underlined" id="supportLink" href="https://s3.amazonaws.com/tylermayberry/carnivalclaw/site/support.html">Support Page</a>
+            <p id="supportText">To report issues with the game, contact <a id="supportLink" href="mailto:jtmayber@ncsu.edu">jtmayber@ncsu.edu</a></p>
+            <p id="copyrightInfo">© 2017 Tyler Mayberry</p>
         </div>
     </div>
 </body>

@@ -10,10 +10,18 @@ body {
   display: inline-block; }
 
 .deviceLogo {
-  width: 10%; }
+  height: 40%; }
 
 .underlined {
   border-bottom: 3px solid #DDFFF7; }
+
+.verticalContainer {
+  vertical-align: middle;
+  display: table-cell; }
+
+#pageWrapper {
+  height: 100%;
+  width: 100%; }
 
 #header {
   height: 25%;
@@ -21,45 +29,61 @@ body {
   text-align: center; }
 
 #logoImg {
-  width: 25%;
-  padding-bottom: 20px; }
+  height: 75%; }
 
 #downloadsSection {
   background: #2be22e;
   text-align: center;
-  margin: auto;
-  height: 100%; }
+  height: 50%;
+  width: 100%;
+  display: table; }
   #downloadsSection p {
-    font-size: 20px; }
+    font-size: 2vh; }
 
 #appleDownloadsContainer {
-  padding: 20px 0; }
+  padding: 20px 0;
+  height: 49%;
+  width: 100%;
+  cursor: pointer;
+  display: table-row;
+  vertical-align: middle; }
 
 #bar {
-  height: 10px;
-  background: #1ac01d; }
+  height: 2%;
+  width: 100%;
+  background: #1ac01d;
+  display: table-row;
+  vertical-align: middle; }
 
 #androidDownloadsContainer {
-  padding: 20px 0; }
+  padding: 20px 0;
+  height: 49%;
+  width: 100%;
+  cursor: pointer;
+  display: table-row;
+  vertical-align: middle; }
 
 #footer {
   height: 25%;
   background: blueviolet;
-  text-align: center;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  position: fixed; }
+  text-align: center; }
+
+#supportText {
+  padding-top: 40px;
+  color: #DDFFF7;
+  font-size: 2vh; }
 
 #supportLink {
-  font-family: "Fredoka One", cursive;
   color: #DDFFF7;
   text-decoration: none;
-  margin: auto; }
+  cursor: pointer; }
+
+#copyrightInfo {
+  font-size: 2vh; }
 
 @media only screen and (max-width: 440px) {
   #downloadsSection p {
-    font-size: 12px; }
+    font-size: 12pt; }
 
   #bar {
     height: 5px; } }
